@@ -1,0 +1,172 @@
+.register {
+  margin: 70px 442px 0;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  align-items: flex-start;
+  width: 396px;
+  align-self: center;
+}
+.register__title {
+  margin: 40px 0 40px;
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.register__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.register__container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-style: none;
+  border-bottom: solid 1px rgb(66, 66, 66);
+  padding: 0 0 10px 0;
+  margin: 0 0 0 0;
+}
+.register__label {
+  color: rgb(139, 139, 139);
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.register__input {
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: left;
+  border-style: none;
+  background-color: #202020;
+  outline: none;
+}
+
+.register__error {
+  color: rgb(238, 52, 101);
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.register__submitButton {
+  width: 396px;
+  height: 45px;
+  border-radius: 3px;
+  background-color: rgb(66, 133, 244);
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  border-style: none;
+  padding: 0;
+  margin: 128px 0 16px;
+  cursor: pointer;
+}
+
+.register__submitButton:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.register__text {
+  align-self: center;
+  color: rgb(139, 139, 139);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.register__link {
+  color: rgb(66, 133, 244);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px #202020 inset !important;
+}
+@media screen and (max-width: 990px) {
+  .register {
+    margin: 56px auto 0;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    align-items: center;
+    width: 410px;
+    align-self: center;
+  }
+  .register__title {
+    margin: 50px 0 96px;
+  }
+  .register__editButton {
+    margin: 170px 0 16px;
+  }
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+}
+@media screen and (max-width: 767px) {
+  .register {
+    margin: 56px auto 0;
+    width: 300px;
+  }
+
+  .register__submitButton {
+    width: 300px;
+  }
+
+  .register__title {
+    margin: 50px 0 80px;
+  }
+  .register__form {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    align-self: center;
+  }
+
+  .register__submitButton {
+    width: 260px;
+    margin: 215px 0 16px;
+  }
+}
