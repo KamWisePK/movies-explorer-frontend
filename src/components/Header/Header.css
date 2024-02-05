@@ -1,0 +1,153 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+  max-height: 74px;
+}
+
+.header_bgColor_blue {
+  background-color: #073042;
+}
+
+.header_smallerPadding{
+  padding: 18px 70px 12px;
+}
+
+.header__logo_link {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.header__reg_container {
+  display: none;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+}
+
+.header__regLink {
+  color: #fff;
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  text-decoration: none;
+}
+
+.header__loginLink {
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  text-decoration: none;
+}
+
+.header__button {
+  width: 76px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background-color: #3ddc84;
+  border: none;
+}
+
+.header__hamburgerButton {
+  background-color: initial;
+  border: none;
+  width: 44px;
+  height: 44px;
+  background-image: url('../../images/HamburgerMenu.svg');
+  cursor: pointer;
+  display: none;
+}
+
+/* Ниже временное решение для переключения Заголовка */
+.temp__HeaderChange {
+  position: absolute;
+  top: 75px;
+  width: 100px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: aqua;
+  color: #e70f0f;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+  text-decoration: none;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+.header__popup{
+  align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    height: 100dvh;
+    justify-content: space-between;
+    max-width: 520px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100dvw;
+    z-index: 25;
+}
+.header__popup::before{
+  background-color: rgba(0,0,0,.08);;
+  bottom: 0;
+  content: "";
+  height: 100dvh;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100dvw;
+  z-index: -1;
+}
+.header__popup::after{
+  background-color: #202020;;
+content: "";
+height: 100dvh;
+max-width: 520px;
+position: absolute;
+right: 0;
+top: 0;
+width: 100dvw;
+z-index: -1;
+}
+
+
+@media screen and (max-width: 990px) {
+  .header {
+    padding: 18px 13px 18px 13px;
+  }
+  .header_smallerPadding{
+    padding: 18px 13px 12px 13px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__hamburgerButton {
+    width: 40px;
+  height: 43px;
+  display: flex;
+  }
+}

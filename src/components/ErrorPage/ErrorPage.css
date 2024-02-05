@@ -1,0 +1,71 @@
+.errorPage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  padding: 246px 440px 60px;
+  text-align: center;
+}
+
+.errorPage__title {
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 140px;
+  font-weight: 400;
+  line-height: 169px;
+  letter-spacing: 0%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.errorPage__subtitle {
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0%;
+  text-align: center;
+  padding: 0;
+  margin: 5px 0 184px;
+}
+.errorPage__button {
+  width: 42px;
+  height: 17px;
+  color: rgb(66, 133, 244);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+  background-color: #202020;
+  border-style: none;
+  align-self: center;
+}
+@media screen and (max-width: 990px) {
+  .errorPage {
+    padding: 0;
+    margin: 408px auto 60px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .errorPage {
+    padding: 0;
+    margin: 408px auto 60px;
+  }
+  .errorPage__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+  .errorPage {
+    padding: 0;
+    margin: 329px auto 60px;
+  }
+  .errorPage__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 10px 0 284px;
+  }
+}

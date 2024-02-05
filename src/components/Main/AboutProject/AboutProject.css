@@ -1,0 +1,165 @@
+.aboutProject {
+  background-color: #202020;
+  padding: 110px 70px;
+}
+
+.aboutProject__title {
+  color: #fff;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dadada;
+}
+
+.aboutProject__subtitleContainer {
+  display: grid;
+  grid-template-columns: 550px;
+  gap: 26px 40px;
+  grid-template-areas:
+    'subtitle1 subtitle2'
+    'text1 text2';
+  margin: 70px 0px 110px 0;
+}
+
+.aboutProject__subtitle {
+  color: #fff;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+  margin: 0;
+  padding: 0;
+}
+
+.aboutProject__subtitle_text {
+  color: #fff;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  margin: 0;
+  padding: 0;
+}
+.aboutProject__subtitle_text_grid-area {
+  grid-area: text1;
+}
+
+.aboutProject__duration_container {
+  display: grid;
+  grid-template-columns: 228px 1fr;
+}
+
+.aboutProject__duration {
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #303030;
+  padding: 9px 0 9px 0;
+  margin: 0;
+}
+
+.aboutProject__duration:first-of-type {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.aboutProject__duration_text {
+  color: #8b8b8b;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px; /* 121.429% */
+  margin: 0;
+  margin-top: 14px;
+  padding: 0;
+}
+
+@media screen and (max-width: 890px) {
+  .aboutProject {
+    padding: 90px 50px;
+  }
+
+  .aboutProject__subtitleContainer {
+    grid-template-columns: 319px;
+    gap: 22px 30px;
+    margin: 70px 0px 93px 0;
+  }
+
+  .aboutProject__subtitle_text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutProject__duration_container {
+    grid-template-columns: 140px 1fr;
+  }
+
+  .aboutProject__duration:nth-of-type(2) {
+    padding: 9px 0 9px 15px;
+  }
+
+  /* Почему то через .aboutProject__duration_text:nth-of-type(2) не применялся паддинг, пришлось делать соседнему элементу */
+  .aboutProject__duration_text ~ .aboutProject__duration_text {
+    padding-left: 15px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .aboutProject {
+    padding: 70px 18px 28px;
+  }
+  .aboutProject__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+  .aboutProject__subtitleContainer {
+    grid-template-columns: 284px;
+    gap: 16px;
+    margin: 60px 0px 60px 0;
+    grid-template-areas:
+      'subtitle1'
+      'text1'
+      'subtitle2'
+      'text2';
+  }
+  .aboutProject__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutProject__subtitle_text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutProject__subtitle:nth-of-type(2) {
+    margin-top: 43px;
+  }
+  .aboutProject__duration_container {
+    grid-template-columns: 100px 1fr;
+  }
+  .aboutProject__duration {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .aboutProject__duration:nth-of-type(2) {
+    padding: 9px 0 9px 0;
+  }
+  .aboutProject__duration_text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
