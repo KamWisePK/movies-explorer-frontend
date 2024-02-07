@@ -18,7 +18,7 @@
 
 .aboutProject__subtitleContainer {
   display: grid;
-  grid-template-columns: 550px;
+  grid-template-columns: 50%;
   gap: 26px 40px;
   grid-template-areas:
     'subtitle1 subtitle2'
@@ -38,7 +38,7 @@
   padding: 0;
 }
 
-.aboutProject__subtitle_text {
+.aboutProject__subtitle-text {
   color: #fff;
   font-family: Inter;
   font-size: 14px;
@@ -48,11 +48,11 @@
   margin: 0;
   padding: 0;
 }
-.aboutProject__subtitle_text_grid-area {
+.aboutProject__subtitle-text_grid-area {
   grid-area: text1;
 }
 
-.aboutProject__duration_container {
+.aboutProject__duration-container {
   display: grid;
   grid-template-columns: 228px 1fr;
 }
@@ -75,7 +75,7 @@
   color: #000;
 }
 
-.aboutProject__duration_text {
+.aboutProject__duration-text {
   color: #8b8b8b;
   text-align: center;
   font-family: Inter;
@@ -94,17 +94,17 @@
   }
 
   .aboutProject__subtitleContainer {
-    grid-template-columns: 319px;
+    
     gap: 22px 30px;
     margin: 70px 0px 93px 0;
   }
 
-  .aboutProject__subtitle_text {
+  .aboutProject__subtitle-text {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .aboutProject__duration_container {
+  .aboutProject__duration-container {
     grid-template-columns: 140px 1fr;
   }
 
@@ -113,7 +113,7 @@
   }
 
   /* Почему то через .aboutProject__duration_text:nth-of-type(2) не применялся паддинг, пришлось делать соседнему элементу */
-  .aboutProject__duration_text ~ .aboutProject__duration_text {
+  .aboutProject__duration-text ~ .aboutProject__duration-text {
     padding-left: 15px;
   }
 }
@@ -127,7 +127,7 @@
     padding-bottom: 28px;
   }
   .aboutProject__subtitleContainer {
-    grid-template-columns: 284px;
+    grid-template-columns: 404px;
     gap: 16px;
     margin: 60px 0px 60px 0;
     grid-template-areas:
@@ -141,14 +141,14 @@
     line-height: 22px;
   }
 
-  .aboutProject__subtitle_text {
+  .aboutProject__subtitle-text {
     font-size: 11px;
     line-height: 16px;
   }
   .aboutProject__subtitle:nth-of-type(2) {
     margin-top: 43px;
   }
-  .aboutProject__duration_container {
+  .aboutProject__duration-container {
     grid-template-columns: 100px 1fr;
   }
   .aboutProject__duration {
@@ -158,8 +158,14 @@
   .aboutProject__duration:nth-of-type(2) {
     padding: 9px 0 9px 0;
   }
-  .aboutProject__duration_text {
+  .aboutProject__duration-text {
     font-size: 11px;
     line-height: 13px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .aboutProject__subtitleContainer {
+    grid-template-columns: 284px;
+   
   }
 }

@@ -8,20 +8,20 @@ const SideMenu = () => {
     <section className='sideMenu'>
       <div className='sideMenu__overlay'>
         <div className='sideMenu__container'>
-          <button className='sideMenu__button_close hover__button' type='button' />
+          <button className='sideMenu__button_close hover-button' type='button' />
           <div className='sideMenu__nav_container'>
-            <Link to='/' className='sideMenu__link hover__link'>
+            <Link to='/' className='sideMenu__link hover-link'>
               Главная
             </Link>
-            <Link to='/movies' className='sideMenu__link  hover__link'>
+            <Link to='/movies' className='sideMenu__link  hover-link'>
               Фильмы
             </Link>
-            <Link to='/saved-movies' className='sideMenu__link  hover__link'>
+            <Link to='/saved-movies' className='sideMenu__link  hover-link'>
               Сохранённые фильмы
             </Link>
           </div>
           <Link to='/profile'>
-            <button className='sideMenu__button_account hover__button'>Аккаунт</button>
+            <button className='sideMenu__button_account hover-button'>Аккаунт</button>
           </Link>
         </div>
       </div>

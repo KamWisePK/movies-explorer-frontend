@@ -11,7 +11,7 @@ function Promo() {
           <p className='promo__text'>
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <a className='promo__anchor hover__link' href='#aboutProject'>Узнать больше</a>
+          <a className='promo__anchor hover-link' href='#aboutProject'>Узнать больше</a>
         </div>
         <img className='promo__img' src={WebPlanet} alt='изображение земного шара из слов Web' />
       </div>

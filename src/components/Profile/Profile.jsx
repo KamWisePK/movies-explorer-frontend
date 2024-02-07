@@ -126,12 +126,12 @@ function Profile() {
 
         <button
           disabled={!name.inputValid || !email.inputValid}
-          className='profile__editButton hover__button'
+          className='profile__editButton hover-button'
         >
           Редактировать
         </button>
       </form>
-      <button className='profile__exitButton hover__button'>Выйти из аккаунта</button>
+      <button className='profile__exitButton hover-button'>Выйти из аккаунта</button>
     </section>
   );
 }

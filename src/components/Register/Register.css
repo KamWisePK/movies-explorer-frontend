@@ -14,7 +14,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: left;
 }
 .register__form {
@@ -37,7 +37,7 @@
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: left;
 }
 .register__input {
@@ -46,7 +46,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: left;
   border-style: none;
   background-color: #202020;
@@ -59,7 +59,7 @@
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: left;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -75,7 +75,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: center;
   border-style: none;
   padding: 0;
@@ -95,7 +95,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -106,7 +106,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: center;
   text-decoration: none;
   margin: 0;

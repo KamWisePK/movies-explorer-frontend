@@ -14,7 +14,7 @@ function SearchForm() {
           placeholder='Фильм'
           required
         ></input>
-        <button type='submit' className='searchForm__button hover__button' >
+        <button type='submit' className='searchForm__button hover-button' >
           Поиск
         </button>
         <FilterCheckbox />

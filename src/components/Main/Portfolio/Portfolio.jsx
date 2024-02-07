@@ -10,21 +10,21 @@ function Portfolio() {
      <nav className="portfolio__navigation">
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
-          <a className='portfolio__link hover__link' href='https://kamwisepk.github.io/how-to-learn/' target='_blank'>
-            <p className='portfolio__link_text'>Статичный сайт</p>
-            <p className='portfolio__link_icon'>↗</p>
+          <a className='portfolio__link hover-link' href='https://kamwisepk.github.io/how-to-learn/' target='_blank'>
+            <p className='portfolio__link-text'>Статичный сайт</p>
+            <p className='portfolio__link-icon'>↗</p>
           </a>
         </li>
         <li className='portfolio__item'>
-          <a className='portfolio__link hover__link' href='https://kamwisepk.github.io/russian-travel/' target='_blank'>
-            <p className='portfolio__link_text'>Адаптивный сайт</p>
-            <p className='portfolio__link_icon'>↗</p>
+          <a className='portfolio__link hover-link' href='https://kamwisepk.github.io/russian-travel/' target='_blank'>
+            <p className='portfolio__link-text'>Адаптивный сайт</p>
+            <p className='portfolio__link-icon'>↗</p>
           </a>
         </li>
-         <li className='portfolio__item'> {/*Удалил сервер после сдачи проета, поэтому только ссылка на гитхаб =(*/}
-          <a className='portfolio__link hover__link' href='https://github.com/KamWisePK/react-mesto-api-full-gha' target='_blank'>
-            <p className='portfolio__link_text'>Одностраничное приложение</p> 
-            <p className='portfolio__link_icon'>↗</p>
+         <li className='portfolio__item'> 
+          <a className='portfolio__link hover-link' href='https://github.com/KamWisePK/react-mesto-api-full-gha' target='_blank'>
+            <p className='portfolio__link-text'>Одностраничное приложение</p> 
+            <p className='portfolio__link-icon'>↗</p>
           </a>
         </li>
       </ul>

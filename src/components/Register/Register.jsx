@@ -150,7 +150,7 @@ function Register() {
         </span>
         <button
           disabled={!name.inputValid || !email.inputValid || !password.inputValid}
-          className='register__submitButton hover__button'
+          className='register__submitButton hover-button'
         >
           Зарегистрироваться
         </button>

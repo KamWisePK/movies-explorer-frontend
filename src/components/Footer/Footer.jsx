@@ -9,11 +9,11 @@ function Footer() {
         <div className='footer__wrapper'>
           <p className='footer__copyright'>© 2024</p>
           <ul className='footer__list'>
-            <li className='footer__list_item'>
-              <a className='footer__link hover__link' href='https://practicum.yandex.ru/'>Яндекс.Практикум</a>
+            <li className='footer__list-item'>
+              <a className='footer__link ' href='https://practicum.yandex.ru/'>Яндекс.Практикум</a>
             </li>
-            <li className='footer__list_item'>
-              <a className='footer__link hover__link' href='https://github.com/KamWisePK'>Github</a>
+            <li className='footer__list-item'>
+              <a className='footer__link hover-link' href='https://github.com/KamWisePK'>Github</a>
             </li>
           </ul>
         </div>

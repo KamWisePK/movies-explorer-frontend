@@ -128,7 +128,7 @@ function Login() {
         </span>
         <button
           disabled={!email.inputValid || !password.inputValid}
-          className='login__submitButton hover__button'
+          className='login__submitButton hover-button'
         >
           Войти
         </button>

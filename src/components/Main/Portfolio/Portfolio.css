@@ -40,7 +40,7 @@
   justify-content: space-between;
   text-decoration: none;
 }
-.portfolio__link_text {
+.portfolio__link-text {
   color: #fff;
   font-family: Inter;
   font-size: 30px;
@@ -51,7 +51,7 @@
   margin: 0;
   padding: 0;
 }
-.portfolio__link_icon {
+.portfolio__link-icon {
   color: #fff;
   font-family: Inter;
   font-size: 30px;
@@ -68,7 +68,7 @@
     padding: 0 50px 90px 50px;
   }
 
-  .portfolio__link_text {
+  .portfolio__link-text {
     font-size: 28px;
     font-weight: 400;
   }
@@ -81,12 +81,12 @@
     font-size: 14px;
     margin-bottom: 42px;
   }
-  .portfolio__link_text {
+  .portfolio__link-text {
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.4px;
   }
-  .portfolio__link_icon {
+  .portfolio__link-icon {
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;

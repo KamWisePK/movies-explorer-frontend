@@ -26,7 +26,7 @@ else {
         <p className='movieCard__duration'>0ч42м</p>
       </div>
       <img className='movieCard__img' alt='Кадр или постер к фильму' src={CardMovie_img}/>
-      <button type='submit' className={`movieCard__button ${buttonStateClass} hover__button`} onClick={likeMovie}>
+      <button type='submit' className={`movieCard__button ${buttonStateClass} hover-button`} onClick={likeMovie}>
         {buttonText}
         </button>
     </li>

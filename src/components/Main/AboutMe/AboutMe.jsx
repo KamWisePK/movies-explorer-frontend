@@ -16,7 +16,7 @@ function AboutMe() {
           понял что мне это интересно, но знаний недостаточно. Таким образом, оказался в числе
           студентов Яндекс Практикума.
         </p>
-        <a className='aboutMe__link_github hover__link' href='https://github.com/KamWisePK/'>Github</a>
+        <a className='aboutMe__link hover-link' href='https://github.com/KamWisePK/'>Github</a>
         <img className='aboutMe__photo' src={dev_photo} alt='Фотография разработчика данного сайта' />
       </div>
     </section>

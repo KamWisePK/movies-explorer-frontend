@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 
-.navigation__acc_container {
+.navigation__acc-container {
   display: flex;
   justify-content: space-between;
   gap: 13px;
@@ -36,7 +36,7 @@
   text-decoration: none;
 }
 
-.navigation__acc_text {
+.navigation__acc-text {
   color: #fff;
   font-family: Inter;
   font-size: 14px;
@@ -47,17 +47,20 @@
   padding: 0;
 }
 
-.navigation__acc_img_container {
+.navigation__acc-imgContainer {
   height: 30px;
   width: 30px;
   align-items: center;
   border-radius: 6px;
-  background-color: #0f4157;
+  background-color: rgb(49, 49, 49);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   padding: 0;
+}
+.navigation__acc_imgContainer_bgColorBlue{
+  background-color: #0f4157;
 }
 
 .hide {

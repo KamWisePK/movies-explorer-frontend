@@ -21,7 +21,7 @@ function App() {
   const pathsWithHeader = ['/', '/movies', '/saved-movies', '/profile'].includes(pathname);
   const pathsWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
   return (
-    <div className='page'>
+    <div className='app'>
       {pathsWithHeader && <Header />}
       <Routes>
         <Route path='/' element={<Main />} />

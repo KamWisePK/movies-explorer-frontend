@@ -15,7 +15,7 @@ function MoviesCardList({isSavedMovies}) {
             
             
         </ul>
-        {!isSavedMovies && (<button type='submit' className='moviesCardList__button hover__button'>Ещё
+        {!isSavedMovies && (<button type='submit' className='moviesCardList__button hover-button'>Ещё
       </button>)}
     </section>
   );

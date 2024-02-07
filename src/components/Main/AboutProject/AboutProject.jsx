@@ -8,20 +8,20 @@ function AboutProject() {
       <div className='aboutProject__subtitleContainer'>
         <h3 className='aboutProject__subtitle'>Дипломный проект включал 5 этапов</h3>
         <h3 className='aboutProject__subtitle'>На выполнение диплома ушло 5 недель</h3>
-        <p className='aboutProject__subtitle_text aboutProject__subtitle_text_grid-area'>
+        <p className='aboutProject__subtitle-text aboutProject__subtitle-text_grid-area'>
           Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные
           доработки.
         </p>
-        <p className='aboutProject__subtitle_text'>
+        <p className='aboutProject__subtitle-text'>
           У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно
           защититься.
         </p>
       </div>
-      <div className='aboutProject__duration_container'>
+      <div className='aboutProject__duration-container'>
         <p className='aboutProject__duration'>1 неделя</p>
         <p className='aboutProject__duration'>4 недели</p>
-        <p className='aboutProject__duration_text'>Back-end</p>
-        <p className='aboutProject__duration_text'>Front-end</p>
+        <p className='aboutProject__duration-text'>Back-end</p>
+        <p className='aboutProject__duration-text'>Front-end</p>
       </div>
     </section>
   );
