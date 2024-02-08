@@ -17,7 +17,7 @@ function Header() {
 
      <Navigation navHide={Vkl}/>
 
-     <ul className={`header__regContainer ${Vkl ? 'show' : ''}`}>
+     <ul className={`header__regContainer ${Vkl ? 'show' : ''} ${location.pathname === "/movies" ? 'hide' : ""} ${location.pathname === "/saved-movies" ? 'hide' : ""} ${location.pathname === "/profile" ? 'hide' : ""}`}>
               <li className="header__regContainer-item">
                 <Link to={'/signup'}className="header__regContainer-link hover-link">
                   Регистрация

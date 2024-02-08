@@ -142,6 +142,13 @@
     margin-left: 15px;
   }
 }
+
+@media screen and (max-width: 760px) {
+  .techs__list {
+    grid-template-columns: repeat(2, 84px);
+  }
+}
+
 @media screen and (max-width: 600px) {
   .techs {
     padding: 110px 18px 70px;
@@ -167,8 +174,3 @@
   }
 }
 
-@media screen and (max-width: 440px) {
-  .techs__list {
-    grid-template-columns: repeat(2, 84px);
-  }
-}
