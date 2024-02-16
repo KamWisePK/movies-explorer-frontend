@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import './SideMenu.css';
 
-const SideMenu = () => {
+function SideMenu ({ isOpened, onClose }) {
   return (
     <section className='sideMenu'>
-      <div className='sideMenu__overlay'>
+      <div className={`sideMenu__overlay ${isOpened && 'popup_opened'}`}>
         <div className='sideMenu__container'>
-          <button className='sideMenu__button_close hover-button' type='button' />
+          <button className='sideMenu__button_close hover-button' onClick={onClose} type='button' />
           <div className='sideMenu__nav_container'>
             <Link to='/' className='sideMenu__link hover-link'>
               Главная

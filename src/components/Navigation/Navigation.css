@@ -20,7 +20,7 @@
 .navigation__link {
   color: #fff;
   text-align: right;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -38,7 +38,7 @@
 
 .navigation__acc-text {
   color: #fff;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

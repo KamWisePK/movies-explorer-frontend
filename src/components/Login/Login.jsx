@@ -1,94 +1,93 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import Logo from '../Logo/Logo';
+
 import './Login.css';
 
-const useValidation = (value, validations) => {
-  const [isEmpty, setEmpty] = useState(true);
-  const [minLengthError, setMinLengthError] = useState(false);
-  const [inputValid, setInputValid] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+function Login({ onLogin, loginError }) {
+  const [userData, setUserData] = React.useState({
+    email: '',
+    password: '',
+  });
 
-  useEffect(() => {
-    for (const validation in validations) {
-      switch (validation) {
-        case 'minLength':
-          value.length < validations[validation]
-            ? setMinLengthError(true)
-            : setMinLengthError(false);
-          break;
-        case 'isEmpty':
-          value ? setEmpty(false) : setEmpty(true);
-          break;
-          case 'isEmail':
-            const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-            email.test(String(value).toLowerCase()) ? setEmailError(false) : setEmailError(true)
-            break;
-      }
-    }
-  }, [value]);
+  const [emailDirty, setEmailDirty] = React.useState(false);
+  const [passwordDirty, setPasswordDirty] = React.useState(false);
 
-  useEffect(() => {
-    if (isEmpty || minLengthError) {
-      setInputValid(false);
+  const [emailError, setEmailError] = React.useState('Email не может быть пустым');
+  const [passwordError, setPasswordError] = React.useState('Пароль не может быть пустым');
+
+  const [formValid, setFormValid] = React.useState(false);
+
+  React.useEffect(() => {
+    if (emailError || passwordError) {
+      setFormValid(false);
     } else {
-      setInputValid(true);
+      setFormValid(true);
     }
-  }, [isEmpty, minLengthError]);
+  }, [emailError, passwordError]);
 
-  return {
-    isEmpty,
-    minLengthError,
-    inputValid,
-    emailError
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+
+    switch (name) {
+      case 'email':
+        const reEmail =
+          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        if (String(value).length === 0) {
+          setEmailError('Email не может быть пустым');
+        } else if (!value.match(reEmail)) {
+          setEmailError('Некорректный email');
+        } else {
+          setEmailError('');
+        }
+        break;
+      case 'password':
+        if (String(value).length === 0) {
+          setPasswordError('Пароль не может быть пустым');
+        } else {
+          setPasswordError('');
+        }
+        break;
+    }
   };
-};
 
-const useInput = (initialValue, validations) => {
-  const [value, setValue] = useState(initialValue);
-  const [isDirty, setDirty] = useState(false);
-  const valid = useValidation(value, validations);
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
-  const onChange = (e) => {
-    setValue(e.target.value);
+    onLogin(userData);
   };
 
-  const onBlur = (e) => {
-    setDirty(true);
+  const blurHandler = (evt) => {
+    switch (evt.target.name) {
+      case 'email':
+        setEmailDirty(true);
+        break;
+      case 'password':
+        setPasswordDirty(true);
+        break;
+    }
   };
-
-  return {
-    value,
-    onChange,
-    onBlur,
-    isDirty,
-    ...valid,
-  };
-};
-
-function Login() {
-  
-  
-  const email = useInput('', { isEmpty: true, minLength: 3, isEmail: true });
-  const password = useInput('', { isEmpty: true, minLength: 5 });
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
 
   return (
     <section className='login'>
       <Logo />
       <h1 className='login__title'>Рады видеть!</h1>
-      <form className='login__form' onSubmit={handleSubmit} noValidate>
+      <form className='login__form' onSubmit={handleSubmit}>
         <fieldset className='login__container'>
           <label className='login__label' for='email'>
             E-mail
           </label>
           <input
-            onChange={(e) => email.onChange(e)}
-            onBlur={(e) => email.onBlur(e)}
-            value={email.value}
+            required
+            value={userData.email}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='email'
             className='login__input'
             type='email'
@@ -96,22 +95,16 @@ function Login() {
             placeholder='Введите ваш E-mail'
           ></input>
         </fieldset>
-        <span className='login__error'>
-          {email.isDirty && email.isEmpty && 'Заполните это поле'}
-          {email.isDirty &&
-            !email.isEmpty &&
-            email.minLengthError &&
-            'E-mail не может быть короче 3 символов'}
-            {email.isDirty && !email.isEmpty && email.emailError && 'Неккоректный E-mail'} &nbsp;
-        </span>
+        {emailDirty && emailError && <span className='login__error'>{emailError}</span>}
         <fieldset className='login__container'>
           <label className='login__label' for='password'>
             Пароль
           </label>
           <input
-            onChange={(e) => password.onChange(e)}
-            onBlur={(e) => password.onBlur(e)}
-            value={password.value}
+            required
+            value={userData.password}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='password'
             className='login__input'
             type='password'
@@ -119,17 +112,8 @@ function Login() {
             placeholder='Введите ваш пароль'
           ></input>
         </fieldset>
-        <span className='login__error'>
-          {password.isDirty && password.isEmpty && 'Заполните это поле'}
-          {password.isDirty &&
-            !password.isEmpty &&
-            password.minLengthError &&
-            'Пароль должен содержать миниум 5 символов'} &nbsp;
-        </span>
-        <button
-          disabled={!email.inputValid || !password.inputValid}
-          className='login__submitButton hover-button'
-        >
+        {passwordDirty && passwordError && <span className='login__error'>{passwordError}</span>}
+        <button disabled={!formValid} className='login__submitButton hover-button'>
           Войти
         </button>
       </form>

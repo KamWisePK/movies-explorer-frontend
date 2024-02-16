@@ -14,7 +14,7 @@
 
 .movieCard__title {
   color: rgb(255, 255, 255);
-  font-family: Inter;
+   
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
@@ -27,7 +27,7 @@
 
 .movieCard__duration {
   color: rgb(139, 139, 139);
-  font-family: Inter;
+   
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
@@ -43,7 +43,7 @@
 }
 
 .movieCard__button {
-  font-family: Inter;
+   
   font-size: 12px;
   font-weight: 400;
   line-height: 11px;

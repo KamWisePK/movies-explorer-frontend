@@ -1,94 +1,109 @@
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Register.css';
 
-const useValidation = (value, validations) => {
-  const [isEmpty, setEmpty] = useState(true);
-  const [minLengthError, setMinLengthError] = useState(false);
-  const [inputValid, setInputValid] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+function Register({ onRegister}) {
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+    name: '',
+  });
 
-  useEffect(() => {
-    for (const validation in validations) {
-      switch (validation) {
-        case 'minLength':
-          value.length < validations[validation]
-            ? setMinLengthError(true)
-            : setMinLengthError(false);
-          break;
-        case 'isEmpty':
-          value ? setEmpty(false) : setEmpty(true);
-          break;
-          case 'isEmail':
-            const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-            email.test(String(value).toLowerCase()) ? setEmailError(false) : setEmailError(true)
-            break;
-      }
-    }
-  }, [value]);
+  const [nameDirty, setNameDirty] = useState(false);
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
 
-  useEffect(() => {
-    if (isEmpty || minLengthError) {
-      setInputValid(false);
-    } else {
-      setInputValid(true);
-    }
-  }, [isEmpty, minLengthError]);
+  const [nameError, setNameError] = useState('Имя не может быть пустым');
+  const [emailError, setEmailError] = useState('Email не может быть пустым');
+  const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
 
-  return {
-    isEmpty,
-    minLengthError,
-    inputValid,
-    emailError
-  };
-};
-
-const useInput = (initialValue, validations) => {
-  const [value, setValue] = useState(initialValue);
-  const [isDirty, setDirty] = useState(false);
-  const valid = useValidation(value, validations);
-
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  const onBlur = (e) => {
-    setDirty(true);
-  };
-
-  return {
-    value,
-    onChange,
-    onBlur,
-    isDirty,
-    ...valid,
-  };
-};
-
-function Register() {
+  const [formValid, setFormValid] = useState(false);
   
-  const name = useInput('', { isEmpty: true, minLength: 3 });
-  const email = useInput('', { isEmpty: true, minLength: 3, isEmail: true });
-  const password = useInput('', { isEmpty: true, minLength: 5 });
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+
+    switch (name) {
+      case 'email':
+        const reEmail =
+          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        if (String(value).length === 0) {
+          setEmailError('Email не может быть пустым');
+        } else if (!value.match(reEmail)) {
+          setEmailError('Некорректный email');
+        } else {
+          setEmailError('');
+        }
+        break;
+      case 'name':
+        const reName = /^[a-яёa-z -]{2,30}$/i;
+        if (String(value).length === 0) {
+          setNameError('Имя не может быть пустым');
+        } else if (!value.match(reName)) {
+          setNameError('Имя должно содержать только латиницу, кириллицу, пробел и дефис');
+        } else {
+          setNameError('');
+        }
+        break;
+      case 'password':
+        if (String(value).length === 0) {
+          setPasswordError('Пароль не может быть пустым');
+        } else {
+          setPasswordError('');
+        }
+        break;
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onRegister(userData);
+  };
+
+  const blurHandler = (evt) => {
+    switch (evt.target.name) {
+      case 'name':
+        setNameDirty(true);
+        break;
+      case 'email':
+        setEmailDirty(true);
+        break;
+      case 'password':
+        setPasswordDirty(true);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (nameError || emailError || passwordError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [nameError, emailError, passwordError]);
 
   return (
     <section className='register'>
       <Logo />
       <h1 className='register__title'>Добро пожаловать!</h1>
-      <form className='register__form' onSubmit={handleSubmit} noValidate>
+      <form className='register__form' onSubmit={handleSubmit}>
         <fieldset className='register__container'>
           <label className='register__label' for='name'>
             Имя
           </label>
           <input
-            onChange={(e) => name.onChange(e)}
-            onBlur={(e) => name.onBlur(e)}
-            value={name.value}
+            required
+            value={userData.name}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='name'
             className='register__input'
             type='text'
@@ -96,21 +111,16 @@ function Register() {
             placeholder='Введите ваше имя'
           ></input>
         </fieldset>
-        <span className='register__error'>
-          {name.isDirty && name.isEmpty && 'Заполните это поле'}
-          {name.isDirty &&
-            !name.isEmpty &&
-            name.minLengthError &&
-            'Имя не может быть короче 3 символов'} &nbsp;
-        </span>
+        {nameDirty && nameError && <span className='register__error'>{nameError}</span>}
         <fieldset className='register__container'>
           <label className='register__label' for='email'>
             E-mail
           </label>
           <input
-            onChange={(e) => email.onChange(e)}
-            onBlur={(e) => email.onBlur(e)}
-            value={email.value}
+            required
+            value={userData.email}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='email'
             className='register__input'
             type='email'
@@ -118,22 +128,16 @@ function Register() {
             placeholder='Введите ваш E-mail'
           ></input>
         </fieldset>
-        <span className='register__error'>
-          {email.isDirty && email.isEmpty && 'Заполните это поле'}
-          {email.isDirty &&
-            !email.isEmpty &&
-            email.minLengthError &&
-            'E-mail не может быть короче 3 символов'}
-            {email.isDirty && !email.isEmpty && email.emailError && 'Неккоректный E-mail'} &nbsp;
-        </span>
+        {emailDirty && emailError && <span className='register__error'>{emailError}</span>}
         <fieldset className='register__container'>
           <label className='register__label' for='password'>
             Пароль
           </label>
           <input
-            onChange={(e) => password.onChange(e)}
-            onBlur={(e) => password.onBlur(e)}
-            value={password.value}
+            required
+            value={userData.password}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='password'
             className='register__input'
             type='password'
@@ -141,15 +145,9 @@ function Register() {
             placeholder='Введите ваш пароль'
           ></input>
         </fieldset>
-        <span className='register__error'>
-          {password.isDirty && password.isEmpty && 'Заполните это поле'}
-          {password.isDirty &&
-            !password.isEmpty &&
-            password.minLengthError &&
-            'Пароль должен содержать миниум 5 символов'} &nbsp;
-        </span>
+        {passwordDirty && passwordError && <span className='register__error'>{passwordError}</span>}
         <button
-          disabled={!name.inputValid || !email.inputValid || !password.inputValid}
+          disabled={!formValid}
           className='register__submitButton hover-button'
         >
           Зарегистрироваться

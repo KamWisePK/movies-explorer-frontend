@@ -1,34 +1,127 @@
 import React, { useState } from 'react';
-import './MoviesCard.css';
-import CardMovie_img from '../../../images/CardMovieImg.svg';
 
-function MoviesCard({isSavedMovies}) {
-  const [liked, setLike] = useState(false);
-  
-  const likeMovie = () => {
-    setLike(!liked);
+import './MoviesCard.css';
+
+import { saveMovie, deleteMovie } from '../../../utils/MainApi';
+import { CurrentUserContext } from '../../Context/CurrentUserContext';
+
+function MoviesCard({
+  fromSavedPage,
+  country,
+  director,
+  duration,
+  year,
+  description,
+  image,
+  trailerLink,
+  nameRU,
+  nameEN,
+  thumbnail,
+  movieId,
+  savedMovies,
+  cardsUpdate,
+  setCardsUpdate,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const [isSavedState, setIsSavedState] = React.useState(
+    savedMovies.some((movie) => {
+      return movie.movieId === movieId && movie.owner === currentUser._id;
+    })
+  );
+  const [currentMovieId, setCurrentMovieId] = React.useState(
+    savedMovies.find((movie) => {
+      return movie.movieId === movieId && movie.owner === currentUser._id;
+    }) || ''
+  );
+
+  const hours = Math.trunc(duration / 60);
+  const minutes = duration % 60;
+  const hoursString = hours > 0 ? `${hours} ч` : '';
+  const minutesString = minutes > 0 ? `${minutes} мин` : '';
+
+  const hadleRemoveBtn = () => {
+    deleteMovie(localStorage.getItem('jwt'), currentMovieId)
+      .then(() => {
+        setIsSavedState(false);
+        setCurrentMovieId('');
+        // if (cardsUpdate) {
+        setCardsUpdate(cardsUpdate + 1);
+        // }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-let buttonStateClass = '';
-let buttonText = '';
-if (isSavedMovies) {
-buttonStateClass = 'movieCard__button_disLike'
-buttonText = '';}
-else {
-  buttonStateClass = liked ? 'movieCard__button_liked' : ''
-  buttonText = !liked ? 'Сохранить' :  '';
-}
- 
+  const handleSaveBtn = () => {
+    if (isSavedState) {
+      hadleRemoveBtn();
+    } else {
+      saveMovie(localStorage.getItem('jwt'), {
+        country: country,
+        director: director,
+        duration: duration,
+        year: year,
+        description: description,
+        image: image,
+        trailerLink: trailerLink,
+        nameRU: nameRU,
+        nameEN: nameEN,
+        thumbnail: thumbnail,
+        movieId: movieId,
+      })
+        .then((movie) => {
+          setIsSavedState(true);
+          setCurrentMovieId(movie._id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    const isSaved = savedMovies.some((movie) => {
+      return movie.movieId === movieId && movie.owner === currentUser._id;
+    });
+
+    const currentMovie =
+      savedMovies.find((movie) => {
+        return movie.movieId === movieId && movie.owner === currentUser._id;
+      }) || '';
+
+    setIsSavedState(isSaved);
+    setCurrentMovieId(currentMovie._id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedMovies]);
+
   return (
     <li className='movieCard'>
       <div className='movieCard__container'>
-        <h2 className='movieCard__title'>В погоне за Бэнкси</h2>
-        <p className='movieCard__duration'>0ч42м</p>
+        <h2 className='movieCard__title'>{nameRU}</h2>
+        <p className='movieCard__duration'>{`${hoursString} ${minutesString}`}</p>
       </div>
-      <img className='movieCard__img' alt='Кадр или постер к фильму' src={CardMovie_img}/>
-      <button type='submit' className={`movieCard__button ${buttonStateClass} hover-button`} onClick={likeMovie}>
-        {buttonText}
-        </button>
+      <a href={trailerLink} >
+        <img className='movieCard__img' alt='Кадр или постер к фильму' src={image} />
+      </a>
+      {
+          fromSavedPage ?
+            (<button
+              className="movieCard__button_disLike hover-button"
+              type="button"
+              onClick={hadleRemoveBtn}
+              />
+            ) :
+            (
+              <button
+                className={`movieCard__button ${isSavedState && 'movieCard__button_liked'} hover-button`}
+                type="button"
+                onClick={handleSaveBtn}
+              />
+            )
+        }
+   
     </li>
   );
 }

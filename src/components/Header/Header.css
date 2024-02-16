@@ -1,130 +1,145 @@
 .header {
+  /* width: 100%; */
   display: flex;
-  justify-content: space-between;
-  padding: 18px 70px;
-  max-height: 74px;
-}
-
-.header_bgColorBlue {
-  background-color: #073042;
-}
-
-.header_smallerPadding {
-  padding: 18px 70px 12px;
-}
-
-.header__logo-link {
-  margin: 0;
-  padding: 0;
-  display: flex;
+  flex-direction: row;
   align-items: center;
-}
-
-.header__logo {
-  width: 38px;
-  height: 38px;
-}
-
-.header__regContainer {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 30px;
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
 }
 
-.header__regContainer-link {
-  color: rgb(255, 255, 255);
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-decoration: none;
+.header_bgc_blue {
+  background: #465DFF;
 }
 
-.header__regContainer-link_login {
-  color: rgb(7, 48, 66);
-  padding: 8px 20px;
-  border-radius: 3px;
-  background-color: rgb(61, 220, 132);
-}
-
-.header__hamburgerButton {
-  background-color: initial;
+.header__sign-up {
+  min-height: 32px;
+  background: transparent;
   border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.header__sign-up:hover {
+  opacity: .6;
+}
+.header__sign-in {
+  margin-left: 30px;
+  background: #2BE080;
+  border-radius: 3px;
+  min-width: 76px;
+  min-height: 32px;
+  border: none;
+  cursor: pointer;
+}
+
+.header__sign-in:hover {
+  opacity: .6;
+}
+.header__saved-films-btn {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 400;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.header__saved-films-btn:hover {
+  opacity: .6;
+}
+.header__notlog {
+  padding: 0 70px;
+}
+
+@media (max-width: 768px) {
+  .header__notlog {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header__notlog {
+    padding: 0 10px;
+  }
+}
+.header__menu-btn {
+  display: none;
+  background: url(../../../images/menu-icon.png) no-repeat;
   width: 44px;
   height: 44px;
-  background-image: url('../../images/HamburgerMenu.svg');
+  border: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .header__menu-btn {
+    display: block;
+  }
+}
+.header__films-btn {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  margin-right: 16px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  display: none;
 }
 
-.header__popup {
-  align-items: center;
+.header__films-btn:hover {
+  opacity: .6;
+}
+.header__film-container {
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media (max-width: 768px){
+  .header__film-container {
+    display: none;
+  }
+}
+.header__entry-buttons {
   display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  height: 100dvh;
   justify-content: space-between;
-  max-width: 520px;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100dvw;
-  z-index: 25;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
 }
-.header__popup::before {
-  background-color: rgba(0, 0, 0, 0.08);
-  bottom: 0;
-  content: '';
-  height: 100dvh;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100dvw;
-  z-index: -1;
-}
-.header__popup::after {
-  background-color: #202020;
-  content: '';
-  height: 100dvh;
-  max-width: 520px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100dvw;
-  z-index: -1;
+.header__container {
+  padding: 0 70px;
 }
 
-@media screen and (max-width: 990px) {
-  .header {
-    padding: 18px 13px 18px 13px;
-  }
-  .header_smallerPadding {
-    padding: 18px 13px 12px 13px;
+@media (max-width: 768px) {
+  .header__container {
+    padding: 0 30px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .header__hamburgerButton {
-    width: 40px;
-    height: 43px;
-    display: flex;
+@media (max-width: 320px) {
+  .header__container {
+    padding: 0 14px;
   }
+}
+.header__acc-btn {
+  background: url(../../../images/acc-btn.png) no-repeat;
+  width: 100px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
 
-  .header__regContainer {
-    gap: 14px;
-  }
+.header__acc-btn:hover {
+  opacity: .6;
+}
 
-  .header__regContainer-link {
-    font-size: 10px;
-    line-height: 1.6;
-  }
-
-  .header__regContainer-link_login {
-    padding: 7px 12px;
+@media (max-width: 768px) {
+  .header__acc-btn {
+    display: none;
   }
 }

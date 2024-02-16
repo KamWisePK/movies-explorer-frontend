@@ -20,7 +20,7 @@
 .promo__header {
   color: #fff;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+   
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -32,7 +32,7 @@
 .promo__text {
   color: #fff;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+   
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -46,7 +46,7 @@
   border-radius: 3px;
   border: 1px solid #fff;
   color: #fff;
-  font-family: Inter;
+   
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

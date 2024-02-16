@@ -1,41 +1,48 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import '../Header/Header.css';
-import Logo from '../Logo/Logo';
-import Navigation from '../Navigation/Navigation';
+import logo from '../images/logo.svg';
+import MenuPopup from './MenuPopup';
+import { Link } from 'react-router-dom';
 
 
-function Header() {
-  const location = useLocation();
+function Header({ loggedIn, fromMainPage = false }) {
+  const [ popupIsOpened, setPopupIsOpened ] = useState(false);
 
-  const [Vkl, setVkl] = useState(false);
-  
+  const onMenuBtnClick = () => {
+    setPopupIsOpened(!popupIsOpened);
+  }
+
+  const onCloseMenuPopup = () => {
+    setPopupIsOpened(false);
+  }
+
   return (
-    <header className={`header ${location.pathname === "/" ? 'header_bgColorBlue' : ""} ${!Vkl ? 'header_smallerPadding' : ''}`}> 
-     
-      <Logo />
-
-     <Navigation navHide={Vkl}/>
-
-     <ul className={`header__regContainer ${Vkl ? 'show' : ''} ${location.pathname === "/movies" ? 'hide' : ""} ${location.pathname === "/saved-movies" ? 'hide' : ""} ${location.pathname === "/profile" ? 'hide' : ""}`}>
-              <li className="header__regContainer-item">
-                <Link to={'/signup'}className="header__regContainer-link hover-link">
-                  Регистрация
-                </Link>
-              </li>
-              <li className="header__regContainer-item">
-                <Link
-                  to={'/signin'}
-                  className="header__regContainer-link header__regContainer-link_login hover-button"
-                >
-                  Войти
-                </Link>
-              </li>
-            </ul>
-     
-      <button className={`header__hamburgerButton hover-button ${Vkl ? 'hide' : ''}`} ></button>
-     
-    </header>
+    <>
+      <MenuPopup isOpened={popupIsOpened} onClose={onCloseMenuPopup} />
+      { loggedIn ?
+        (
+          <header className={`header__container ${fromMainPage && 'header_bgc_blue'}`}>
+            <div className="header">
+                <Link to="/"><img src={logo} alt="logo" className="header__logo" /></Link>
+              <div className="header__film-container">
+                  <Link to="/movies" className='header__films-btn'>Фильмы</Link>
+                  <Link to="/saved-movies" className='header__saved-films-btn'>Сохраненные фильмы</Link>
+              </div>
+              <Link to="/profile" ><button className="header__acc-btn" type="button"/></Link>
+              <button className="header__menu-btn" onClick={onMenuBtnClick} type="button" />
+            </div>
+          </header>
+        ) :
+        (
+          <header className={`header header__notlog ${fromMainPage && 'header_bgc_blue'}`}>
+            <Link to="/"><img src={logo} alt="logo" className="header__logo" /></Link>
+            <div className="header__entry-buttons">
+              <Link to="/signup"><button className="header__sign-up" type="button">Регистрация</button></Link>
+              <Link to="/signin"><button className="header__sign-in" type="button">Войти</button></Link>
+            </div>
+          </header>
+        )
+      }
+    </>
   );
 }
 

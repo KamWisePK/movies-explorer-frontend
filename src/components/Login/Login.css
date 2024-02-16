@@ -10,7 +10,7 @@
 .login__title {
   margin: 40px 0 40px;
   color: rgb(255, 255, 255);
-  font-family: Inter;
+   
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
@@ -33,7 +33,7 @@
 }
 .login__label {
   color: rgb(139, 139, 139);
-  font-family: Inter;
+   
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -42,7 +42,7 @@
 }
 .login__input {
   color: rgb(255, 255, 255);
-  font-family: Inter;
+   
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -55,7 +55,7 @@
 
 .login__error {
   color: rgb(238, 52, 101);
-  font-family: Inter;
+   
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -71,7 +71,7 @@
   border-radius: 3px;
   background-color: rgb(66, 133, 244);
   color: rgb(255, 255, 255);
-  font-family: Inter;
+   
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
@@ -91,7 +91,7 @@
 .login__text {
   align-self: center;
   color: rgb(139, 139, 139);
-  font-family: Inter;
+   
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -102,7 +102,7 @@
 }
 .login__link {
   color: rgb(66, 133, 244);
-  font-family: Inter;
+   
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;

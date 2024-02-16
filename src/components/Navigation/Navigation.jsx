@@ -15,7 +15,8 @@ function Navigation({navHide}) {
           Сохранённые фильмы
         </Link>
       </div>
-      <Link className={`navigation__acc-container hover-link ${location.pathname === "/" ? 'hide' : ""} `}  to={'/profile'}>
+      <Link className={`navigation__acc-container hover-link ${location.pathname === "/" ? 'hide' : ""} `}  
+      to={'/profile'}>
         <p className='navigation__acc-text'>Аккаунт</p>
         <div className={`navigation__acc-imgContainer ${location.pathname === '/' ? 'navigation__acc-imgContainer_bgColorBlue' : ''}`}>
           <img className='navigation__acc-img'  alt='Иконка входа в аккаунт' src={profileImg} />

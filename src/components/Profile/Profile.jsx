@@ -1,90 +1,101 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 
-const useValidation = (value, validations) => {
-  const [isEmpty, setEmpty] = useState(true);
-  const [minLengthError, setMinLengthError] = useState(false);
-  const [inputValid, setInputValid] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+function Profile({ onLogout, onProfileUpdate, updateUserError, updateSuccess }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const [userData, setUserData] = useState({
+    name: currentUser.name,
+    email: currentUser.email,
+  });
+
+  const [nameDirty, setNameDirty] = useState(false);
+  const [emailDirty, setEmailDirty] = useState(false);
+
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    for (const validation in validations) {
-      switch (validation) {
-        case 'minLength':
-          value.length < validations[validation]
-            ? setMinLengthError(true)
-            : setMinLengthError(false);
-          break;
-        case 'isEmpty':
-          value ? setEmpty(false) : setEmpty(true);
-          break;
-        case 'isEmail':
-          const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-          email.test(String(value).toLowerCase()) ? setEmailError(false) : setEmailError(true);
-          break;
-      }
-    }
-  }, [value]);
-
-  useEffect(() => {
-    if (isEmpty || minLengthError) {
-      setInputValid(false);
+    if (
+      emailError ||
+      nameError ||
+      (currentUser.name === userData.name && currentUser.email === userData.email)
+    ) {
+      setFormValid(false);
     } else {
-      setInputValid(true);
+      setFormValid(true);
     }
-  }, [isEmpty, minLengthError]);
+  }, [emailError, nameError, currentUser.name, currentUser.email, userData.name, userData.email]);
 
-  return {
-    isEmpty,
-    minLengthError,
-    inputValid,
-    emailError,
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+
+    switch (name) {
+      case 'email':
+        const reEmail =
+          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        if (String(value).length === 0) {
+          setEmailError('Email не может быть пустым');
+        } else if (!value.match(reEmail)) {
+          setEmailError('Некорректный email');
+        } else {
+          setEmailError('');
+        }
+        break;
+      case 'name':
+        const reName = /^[a-яёa-z -]{2,30}$/i;
+        if (String(value).length === 0) {
+          setNameError('Имя не может быть пустым');
+        } else if (!value.match(reName)) {
+          setNameError('Имя должно содержать только латиницу, кириллицу, пробел и дефис');
+        } else {
+          setNameError('');
+        }
+        break;
+    }
   };
-};
 
-const useInput = (initialValue, validations) => {
-  const [value, setValue] = useState(initialValue);
-  const [isDirty, setDirty] = useState(false);
-  const valid = useValidation(value, validations);
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
-  const onChange = (e) => {
-    setValue(e.target.value);
+    onProfileUpdate(userData);
   };
 
-  const onBlur = (e) => {
-    setDirty(true);
+  const blurHandler = (evt) => {
+    switch (evt.target.name) {
+      case 'name':
+        setNameDirty(true);
+        break;
+      case 'email':
+        setEmailDirty(true);
+        break;
+    }
   };
-
-  return {
-    value,
-    onChange,
-    onBlur,
-    isDirty,
-    ...valid,
-  };
-};
-
-function Profile() {
-  const name = useInput('', { isEmpty: true, minLength: 3 });
-  const email = useInput('', { isEmpty: true, minLength: 3, isEmail: true });
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
 
   return (
     <section className='profile'>
-      <h1 className='profile__title'>Привет, Виталий!</h1>
-      <form className='profile__form' onSubmit={handleSubmit} noValidate>
+      <h1 className='profile__title'>{`Привет, ${currentUser.name}!`}</h1>
+      <form className='profile__form' onSubmit={handleSubmit}>
         <fieldset className='profile__container'>
           <label className='profile__label' for='name'>
             Имя
           </label>
           <input
-            onChange={(e) => name.onChange(e)}
-            onBlur={(e) => name.onBlur(e)}
-            value={name.value}
+            required
+            value={userData.name}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='name'
             className='profile__input'
             type='text'
@@ -92,22 +103,16 @@ function Profile() {
             placeholder='Введите ваше имя'
           ></input>
         </fieldset>
-        <span className='profile__error'>
-          {name.isDirty && name.isEmpty && 'Заполните это поле'}
-          {name.isDirty &&
-            !name.isEmpty &&
-            name.minLengthError &&
-            'Имя не может быть короче 3 символов'}{' '}
-          &nbsp;
-        </span>
+        {nameDirty && nameError && <span className='profile__error'>{nameError}</span>}
         <fieldset className='profile__container'>
           <label className='profile__label' for='email'>
             E-mail
           </label>
           <input
-            onChange={(e) => email.onChange(e)}
-            onBlur={(e) => email.onBlur(e)}
-            value={email.value}
+            required
+            value={userData.email}
+            onChange={handleChange}
+            onBlur={blurHandler}
             name='email'
             className='profile__input'
             type='email'
@@ -115,23 +120,18 @@ function Profile() {
             placeholder='Введите ваш E-mail'
           ></input>
         </fieldset>
-        <span className='profile__error'>
-          {email.isDirty && email.isEmpty && 'Заполните это поле'}
-          {email.isDirty &&
-            !email.isEmpty &&
-            email.minLengthError &&
-            'E-mail не может быть короче 3 символов'}
-          {email.isDirty && !email.isEmpty && email.emailError && 'Неккоректный E-mail'} &nbsp;
-        </span>
+        {emailDirty && emailError && <span className='profile__error'>{emailError}</span>}
+        {updateUserError && <span className='profile__error'>{updateUserError}</span>}
+        {updateSuccess && <span>Информация о пользователе успешно обновлена</span>}
 
         <button
-          disabled={!name.inputValid || !email.inputValid}
+          disabled={!formValid}
           className='profile__editButton hover-button'
         >
           Редактировать
         </button>
       </form>
-      <button className='profile__exitButton hover-button'>Выйти из аккаунта</button>
+      <button onClick={onLogout} className='profile__exitButton hover-button'>Выйти из аккаунта</button>
     </section>
   );
 }

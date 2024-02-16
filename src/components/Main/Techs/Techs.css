@@ -4,7 +4,7 @@
 }
 .techs__title {
   color: #fff;
-  font-family: Inter;
+   
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
@@ -17,7 +17,7 @@
 .techs__subtitle {
   color: #fff;
   text-align: center;
-  font-family: Inter;
+   
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -28,7 +28,7 @@
 .techs__text {
   color: #fff;
   text-align: center;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -51,7 +51,7 @@
   display: flex;
   color: #fff;
   text-align: center;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -128,7 +128,7 @@
     display: flex;
     color: #fff;
     text-align: center;
-    font-family: Inter;
+     
     font-size: 12px;
     font-style: normal;
     font-weight: 400;

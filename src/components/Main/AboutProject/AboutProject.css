@@ -5,7 +5,7 @@
 
 .aboutProject__title {
   color: #fff;
-  font-family: Inter;
+   
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
@@ -28,7 +28,7 @@
 
 .aboutProject__subtitle {
   color: #fff;
-  font-family: Inter;
+   
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -40,7 +40,7 @@
 
 .aboutProject__subtitle-text {
   color: #fff;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -60,7 +60,7 @@
 .aboutProject__duration {
   color: #fff;
   text-align: center;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -78,7 +78,7 @@
 .aboutProject__duration-text {
   color: #8b8b8b;
   text-align: center;
-  font-family: Inter;
+   
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

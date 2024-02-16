@@ -8,7 +8,7 @@
   color: #8b8b8b;
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+   
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -26,7 +26,7 @@
 .footer__copyright {
   color: #fff;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+   
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -48,7 +48,7 @@
   color: #fff;
   text-align: right;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+   
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
