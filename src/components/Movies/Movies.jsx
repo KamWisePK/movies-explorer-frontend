@@ -1,5 +1,8 @@
+import React from 'react';
+
 import './Movies.css';
 
+import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
@@ -9,7 +12,7 @@ import { getSavedMovies } from '../../utils/MainApi';
 
 import '../Hover/Hover.css';
 
-function Movies({  firstSubmit, setFirstSubmit }) {
+function Movies({ loggedIn,  firstSubmit, setFirstSubmit }) {
   const [cards, setCards] = React.useState(JSON.parse(localStorage.getItem('cards')) || []);
   const [fCards, setFCards] = React.useState(JSON.parse(localStorage.getItem('fCards')) || []);
   const [loading, setLoading] = React.useState(false);
@@ -83,6 +86,8 @@ function Movies({  firstSubmit, setFirstSubmit }) {
   }, [shorts]);
 
   return (
+    <>
+    <Header loggedIn={loggedIn}/>
     <section className='movies'>
       <SearchForm
         request={request}
@@ -102,6 +107,7 @@ function Movies({  firstSubmit, setFirstSubmit }) {
         />
       )}
     </section>
+    </>
   );
 }
 

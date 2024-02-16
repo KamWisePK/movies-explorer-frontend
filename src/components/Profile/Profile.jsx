@@ -1,9 +1,11 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Header from '../Header/Header';
+
+import { CurrentUserContext } from '../Context/CurrentUserContext';
 
 function Profile({ onLogout, onProfileUpdate, updateUserError, updateSuccess }) {
   const currentUser = useContext(CurrentUserContext);
@@ -85,6 +87,9 @@ function Profile({ onLogout, onProfileUpdate, updateUserError, updateSuccess }) 
 
   return (
     <section className='profile'>
+        <Header
+        loggedIn={true}
+      />
       <h1 className='profile__title'>{`Привет, ${currentUser.name}!`}</h1>
       <form className='profile__form' onSubmit={handleSubmit}>
         <fieldset className='profile__container'>

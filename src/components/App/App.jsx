@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 import { CurrentUserContext } from '../Context/CurrentUserContext';
 
@@ -19,7 +19,7 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 
 function App() {
   const { pathname } = useLocation();
-  const pathsWithHeader = ['/', '/movies', '/saved-movies', '/profile'].includes(pathname);
+  
   const pathsWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
   const [currentUser, setCurrentUser] = React.useState({});
@@ -120,7 +120,6 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='app'>
-        {pathsWithHeader && <Header loggedIn={true} />}
         <Routes>
           <Route path='/' element={<Main loggedIn={loggedIn} fromMainPage={true} />} />
           {loggedIn ? (

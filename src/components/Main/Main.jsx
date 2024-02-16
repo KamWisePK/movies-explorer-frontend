@@ -7,9 +7,13 @@ import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 import '../Hover/Hover.css';
 
-function Main() {
+function Main({loggedIn, fromMainPage}) {
   return (
     <>
+    <Header
+          loggedIn={loggedIn}
+          fromMainPage={fromMainPage}
+        />
       <main className='page'>
         <Promo />
         <AboutProject />

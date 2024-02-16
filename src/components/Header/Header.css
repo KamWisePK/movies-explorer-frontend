@@ -7,7 +7,7 @@
 }
 
 .header_bgc_blue {
-  background: #465DFF;
+  background: #073042;
 }
 
 .header__sign-up {
@@ -63,7 +63,7 @@
 }
 .header__menu-btn {
   display: none;
-  background: url(../../../images/menu-icon.png) no-repeat;
+  background: url(../../images/menu-icon.png) no-repeat;
   width: 44px;
   height: 44px;
   border: none;
@@ -126,7 +126,7 @@
   }
 }
 .header__acc-btn {
-  background: url(../../../images/acc-btn.png) no-repeat;
+  background: url(../../images/acc-btn.png) no-repeat;
   width: 100px;
   height: 30px;
   border: none;

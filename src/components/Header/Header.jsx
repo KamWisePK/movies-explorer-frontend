@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
-import logo from '../images/logo.svg';
-import MenuPopup from './MenuPopup';
+import Logo from '../Logo/Logo';
+import SideMenu from '../SideMenu/SideMenu';
 import { Link } from 'react-router-dom';
+
+import './Header.css';
 
 
 function Header({ loggedIn, fromMainPage = false }) {
-  const [ popupIsOpened, setPopupIsOpened ] = useState(false);
+  const [ SideMenuIsOpened, setSideMenuIsOpened ] = useState(false);
 
   const onMenuBtnClick = () => {
-    setPopupIsOpened(!popupIsOpened);
+    setSideMenuIsOpened(!SideMenuIsOpened);
   }
 
-  const onCloseMenuPopup = () => {
-    setPopupIsOpened(false);
+
+  const onCloseMenuSideMenu = () => {
+    setSideMenuIsOpened(false);
   }
 
   return (
     <>
-      <MenuPopup isOpened={popupIsOpened} onClose={onCloseMenuPopup} />
+      <SideMenu isOpened={SideMenuIsOpened} onClose={onCloseMenuSideMenu} />
       { loggedIn ?
         (
           <header className={`header__container ${fromMainPage && 'header_bgc_blue'}`}>
             <div className="header">
-                <Link to="/"><img src={logo} alt="logo" className="header__logo" /></Link>
+                <Logo />
               <div className="header__film-container">
                   <Link to="/movies" className='header__films-btn'>Фильмы</Link>
                   <Link to="/saved-movies" className='header__saved-films-btn'>Сохраненные фильмы</Link>
@@ -34,7 +37,7 @@ function Header({ loggedIn, fromMainPage = false }) {
         ) :
         (
           <header className={`header header__notlog ${fromMainPage && 'header_bgc_blue'}`}>
-            <Link to="/"><img src={logo} alt="logo" className="header__logo" /></Link>
+            <Logo />
             <div className="header__entry-buttons">
               <Link to="/signup"><button className="header__sign-up" type="button">Регистрация</button></Link>
               <Link to="/signin"><button className="header__sign-in" type="button">Войти</button></Link>
