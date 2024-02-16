@@ -38,7 +38,7 @@ function App() {
   function handleRegister({ email, name, password }) {
     register(email, password, name)
       .then(() => {
-        //здесь нужно сразу залогинить пользователя и отправить его на страницу с фильмами
+     
         handleLogin({ email, password });
         navigate('/movies');
       })
