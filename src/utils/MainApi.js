@@ -1,12 +1,13 @@
-//export const BASE_URL = 'http://localhost:4000';
- export const BASE_URL = 'api.diplomyandex.movies.nomoredomainsmonster.ru';
+
+ export const BASE_URL = 'http://api.diplomyandex.movies.nomoredomainsmonster.ru';
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({ email, password, name })
   }).then(checkAnswer);

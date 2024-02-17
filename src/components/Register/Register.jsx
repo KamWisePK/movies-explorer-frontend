@@ -96,7 +96,7 @@ function Register({ onRegister}) {
       <h1 className='register__title'>Добро пожаловать!</h1>
       <form className='register__form' onSubmit={handleSubmit}>
         <fieldset className='register__container'>
-          <label className='register__label' for='name'>
+          <label className='register__label' htmlFor='name'>
             Имя
           </label>
           <input
@@ -113,7 +113,7 @@ function Register({ onRegister}) {
         </fieldset>
         {nameDirty && nameError && <span className='register__error'>{nameError}</span>}
         <fieldset className='register__container'>
-          <label className='register__label' for='email'>
+          <label className='register__label' htmlFor='email'>
             E-mail
           </label>
           <input
@@ -130,7 +130,7 @@ function Register({ onRegister}) {
         </fieldset>
         {emailDirty && emailError && <span className='register__error'>{emailError}</span>}
         <fieldset className='register__container'>
-          <label className='register__label' for='password'>
+          <label className='register__label' htmlFor='password'>
             Пароль
           </label>
           <input
