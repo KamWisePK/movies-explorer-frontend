@@ -58,8 +58,8 @@ function Login({ onLogin, loginError }) {
   };
 
   const handleSubmit = (evt) => {
-    evt.preventDefault();
-
+   // evt.preventDefault();
+console.log(true)
     onLogin(userData);
   };
 
@@ -113,9 +113,9 @@ function Login({ onLogin, loginError }) {
           ></input>
         </fieldset>
         {passwordDirty && passwordError && <span className='login__error'>{passwordError}</span>}
-        <button disabled={!formValid} className='login__submitButton hover-button'>
-          Войти
-        </button>
+        <input type='submit' disabled={!formValid} className='login__submitButton hover-button' value='Войти' />
+          
+        
       </form>
       <p className='login__text'>
         Еще не зарегистрированы?&nbsp;

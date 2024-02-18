@@ -49,18 +49,23 @@ function App() {
   }
 
   function handleLogin({ email, password }) {
+    console.log('sdsdsdsd')
     authorize(email, password)
       .then((data) => {
         if (!data) throw new Error('Неверные имя пользователя или пароль');
+        console.log(data.token)
         if (data.token) {
           setLoggedIn(true);
+          
           localStorage.setItem('jwt', data.token);
+          
           navigate('/movies');
         }
       })
       .catch((error) => {
         setLoginError(error);
         console.log(error);
+        console.log('sdsdsdsd');
       });
   }
 
