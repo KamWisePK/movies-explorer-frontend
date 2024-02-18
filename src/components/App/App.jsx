@@ -54,13 +54,13 @@ function App() {
       .then((data) => {
         if (!data) throw new Error('Неверные имя пользователя или пароль');
         console.log(data)
-        if (data.token) {
+       
           setLoggedIn(true);
           
           localStorage.setItem('jwt', data.token);
           
           navigate('/movies');
-        }
+        
       })
       .catch((error) => {
         setLoginError(error);

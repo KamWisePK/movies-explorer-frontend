@@ -10,6 +10,7 @@ export const register = (email, password, name) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       },
+      credentials:'include',
     body: JSON.stringify({ email, password, name })
   }).then(checkAnswer);
 };
