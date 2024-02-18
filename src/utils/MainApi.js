@@ -7,8 +7,7 @@ export const register = (email, password, name) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    },
+      },
     body: JSON.stringify({ email, password, name })
   }).then(checkAnswer);
 };
