@@ -35,6 +35,7 @@ export const saveMovie = (token, movie) => {
       'Content-Type': 'application/json',
       'Authorization': token
     },
+    credentials:'include',
     body: JSON.stringify(movie)
   }).then(checkAnswer);
 }
@@ -46,7 +47,8 @@ export const getSavedMovies = (token) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': token
-    }
+    },
+    credentials:'include',
   }).then(checkAnswer);
 }
 
@@ -57,7 +59,8 @@ export const deleteMovie = (token, id) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': token
-    }
+    },
+    credentials:'include',
   }).then(checkAnswer);
 }
 
@@ -68,7 +71,8 @@ export const getUserInfo = (token) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': token
-    }
+    },
+    credentials:'include',
   }).then(checkAnswer);
 }
 
@@ -80,6 +84,7 @@ export const updateUserInfo = (token, userData) => {
       'Content-Type': 'application/json',
       'Authorization': token
     },
+    credentials:'include',
     body: JSON.stringify(userData)
   }).then(checkAnswer);
 }
