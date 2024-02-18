@@ -53,7 +53,7 @@ function App() {
     authorize(email, password)
       .then((data) => {
         if (!data) throw new Error('Неверные имя пользователя или пароль');
-        console.log(data.token)
+        console.log(data)
         if (data.token) {
           setLoggedIn(true);
           
