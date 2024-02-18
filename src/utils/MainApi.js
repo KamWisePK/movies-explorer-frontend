@@ -33,7 +33,7 @@ export const saveMovie = (token, movie) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+      
     },
     credentials:'include',
     body: JSON.stringify(movie)
@@ -46,7 +46,7 @@ export const getSavedMovies = (token) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+      
     },
     credentials:'include',
   }).then(checkAnswer);
@@ -58,7 +58,7 @@ export const deleteMovie = (token, id) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+      
     },
     credentials:'include',
   }).then(checkAnswer);
@@ -70,7 +70,7 @@ export const getUserInfo = (token) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+      
     },
     credentials:'include',
   }).then(checkAnswer);
@@ -82,7 +82,7 @@ export const updateUserInfo = (token, userData) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+     
     },
     credentials:'include',
     body: JSON.stringify(userData)
