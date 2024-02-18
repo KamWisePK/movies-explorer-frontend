@@ -49,7 +49,7 @@ function App() {
   }
 
   function handleLogin({ email, password }) {
-    console.log('sdsdsdsd')
+    console.log('123')
     authorize(email, password)
       .then((data) => {
         if (!data) throw new Error('Неверные имя пользователя или пароль');

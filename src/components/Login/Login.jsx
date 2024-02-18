@@ -58,7 +58,7 @@ function Login({ onLogin, loginError }) {
   };
 
   const handleSubmit = (evt) => {
-   // evt.preventDefault();
+   evt.preventDefault();
 console.log(true)
     onLogin(userData);
   };
