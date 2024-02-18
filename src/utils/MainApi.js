@@ -1,5 +1,5 @@
 
- export const BASE_URL = 'https://api.savemovies.valerkamade.ru';
+ export const BASE_URL = 'https://api.diplomyandex.movies.nomoredomainsmonster.ru';
 
  //export const BASE_URL = 'http://localhost:3000';
 
