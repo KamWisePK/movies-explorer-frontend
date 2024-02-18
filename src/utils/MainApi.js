@@ -1,5 +1,5 @@
 
- export const BASE_URL = 'http://api.diplomyandex.movies.nomoredomainsmonster.ru';
+ export const BASE_URL = 'https://api.diplomyandex.movies.nomoredomainsmonster.ru';
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {
