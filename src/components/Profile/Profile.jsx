@@ -86,10 +86,12 @@ function Profile({ onLogout, onProfileUpdate, updateUserError, updateSuccess }) 
   };
 
   return (
+    <>
+    <Header
+    loggedIn={true}
+  />
     <section className='profile'>
-        <Header
-        loggedIn={true}
-      />
+       
       <h1 className='profile__title'>{`Привет, ${currentUser.name}!`}</h1>
       <form className='profile__form' onSubmit={handleSubmit}>
         <fieldset className='profile__container'>
@@ -138,6 +140,7 @@ function Profile({ onLogout, onProfileUpdate, updateUserError, updateSuccess }) 
       </form>
       <button onClick={onLogout} className='profile__exitButton hover-button'>Выйти из аккаунта</button>
     </section>
+    </>
   );
 }
 
