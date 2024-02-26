@@ -2,6 +2,7 @@ import React from 'react';
 
 import './SavedMovies.css';
 
+import Header from '../../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../../Preloader/Preloader';
@@ -10,7 +11,7 @@ import { getSavedMovies } from '../../../utils/MainApi';
 
 import { CurrentUserContext } from '../../Context/CurrentUserContext';
 
-function SavedMovies() {
+function SavedMovies({ loggedIn }) {
   const [savedMovies, setSavedMoives] = React.useState([]);
   const [savedFilteredMovies, setSavedFilteredMovies] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -75,6 +76,8 @@ function SavedMovies() {
   }, [shorts]);
 
   return (
+    <>
+    <Header loggedIn={loggedIn}/>
     <section className='SavedMovies'>
       <SearchForm
         request={request}
@@ -96,6 +99,7 @@ function SavedMovies() {
         />
       )}
     </section>
+    </>
   );
 }
 

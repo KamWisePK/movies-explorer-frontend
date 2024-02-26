@@ -6,7 +6,7 @@ import './SideMenu.css';
 function SideMenu ({ isOpened, onClose }) {
   return (
     <section className='sideMenu'>
-      <div className={`sideMenu__overlay ${isOpened && 'popup_opened'}`}>
+      <div className={`sideMenu__overlay ${isOpened && 'sideMenu__overlay_visible'}`}>
         <div className='sideMenu__container'>
           <button className='sideMenu__button_close hover-button' onClick={onClose} type='button' />
           <div className='sideMenu__nav_container'>
@@ -21,7 +21,7 @@ function SideMenu ({ isOpened, onClose }) {
             </Link>
           </div>
           <Link to='/profile'>
-            <button className='sideMenu__button_account hover-button'>Аккаунт</button>
+            <button className='sideMenu__button_account hover-button'></button>
           </Link>
         </div>
       </div>

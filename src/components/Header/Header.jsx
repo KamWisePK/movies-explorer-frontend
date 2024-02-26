@@ -26,15 +26,15 @@ function Header({ loggedIn, fromMainPage = false }) {
           <header className={`header__container ${fromMainPage && 'header_bgc_blue'}`}>
             <div className="header">
                 <Logo />
-               <div className='yyyyy'>
+               <div className='header__navigation'>
               <div className="header__film-container">
-                  <Link to="/movies" className='header__films-btn'>Фильмы</Link>
-                  <Link to="/saved-movies" className='header__saved-films-btn'>Сохраненные фильмы</Link>
+                  <Link to="/movies" className='header__films-btn hover-link'>Фильмы</Link>
+                  <Link to="/saved-movies" className='header__saved-films-btn hover-link'>Сохраненные фильмы</Link>
               </div>
-              <Link to="/profile" ><button className={`header__acc-btn ${fromMainPage && 'header__acc-btn_blue'}`} type="button"/></Link>
+              <Link to="/profile" ><button className={`header__acc-btn ${fromMainPage && 'header__acc-btn_blue'} hover-button`} type="button"/></Link>
               </div>
               </div>
-              <button className="header__menu-btn" onClick={onMenuBtnClick} type="button" />
+              <button className="header__menu-btn hover-button" onClick={onMenuBtnClick} type="button" />
             
           </header>
         ) :
