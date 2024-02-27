@@ -9,6 +9,7 @@ class MoviesApi {
       method: "GET",
       headers: this._headers,
       credentials:'include',
+      mode: "cors",
     })
       .then(res => this._checkRequestResult(res))
   }
@@ -17,6 +18,7 @@ class MoviesApi {
     if (res.ok) {
       return res.json();
     }
+    console.log(res)
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
@@ -24,7 +26,8 @@ class MoviesApi {
 const moviesApi = new MoviesApi({
   baseUrl: 'https://api.nomoreparties.co',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    
   },
   credentials:'include',
 });

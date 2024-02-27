@@ -42,6 +42,7 @@ function Movies({ loggedIn,  firstSubmit, setFirstSubmit }) {
       moviesApi
         .getInitalCardsList()
         .then((initalCards) => {
+          console.log(initalCards)
           setCards(initalCards);
           localStorage.setItem('cards', JSON.stringify(initalCards));
           localStorage.setItem('request', request);
@@ -50,8 +51,9 @@ function Movies({ loggedIn,  firstSubmit, setFirstSubmit }) {
           setLoading(false);
         })
         .catch((error) => {
+          
           setLoading(false);
-          console.log(error);
+          console.log(...error);
           setRequestError(true);
         });
     } else {
