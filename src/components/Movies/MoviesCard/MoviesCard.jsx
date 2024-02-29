@@ -24,12 +24,12 @@ function MoviesCard({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const [isSavedState, setIsSavedState] = React.useState(
+  const [isSavedState, setIsSavedState] = useState(
     savedMovies.some((movie) => {
       return movie.movieId === movieId && movie.owner === currentUser._id;
     })
   );
-  const [currentMovieId, setCurrentMovieId] = React.useState(
+  const [currentMovieId, setCurrentMovieId] = useState(
     savedMovies.find((movie) => {
       return movie.movieId === movieId && movie.owner === currentUser._id;
     }) || ''
@@ -74,9 +74,8 @@ function MoviesCard({
       })
         .then((movie) => {
           setIsSavedState(true);
-          console.log(movie);
-          
           setCurrentMovieId(movie._id);
+          console.log(currentMovieId)
         })
         .catch((error) => {
           console.log(error);
