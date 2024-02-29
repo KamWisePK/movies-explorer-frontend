@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Register.css';
 
-function Register({ onRegister}) {
+function Register({ onRegister }) {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -21,7 +21,7 @@ function Register({ onRegister}) {
   const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
 
   const [formValid, setFormValid] = useState(false);
-  
+
   const handleChange = (evt) => {
     const { name, value } = evt.target;
 
@@ -46,6 +46,8 @@ function Register({ onRegister}) {
         const reName = /^[a-яёa-z -]{2,30}$/i;
         if (String(value).length === 0) {
           setNameError('Имя не может быть пустым');
+        } else if (String(value).length === 1) {
+          setNameError('Имя должно быть не короче 2 символов');
         } else if (!value.match(reName)) {
           setNameError('Имя должно содержать только латиницу, кириллицу, пробел и дефис');
         } else {
@@ -146,10 +148,7 @@ function Register({ onRegister}) {
           ></input>
         </fieldset>
         {passwordDirty && passwordError && <span className='register__error'>{passwordError}</span>}
-        <button
-          disabled={!formValid}
-          className='register__submitButton hover-button'
-        >
+        <button disabled={!formValid} className='register__submitButton hover-button'>
           Зарегистрироваться
         </button>
       </form>

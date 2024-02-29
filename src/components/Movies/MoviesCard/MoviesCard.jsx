@@ -108,14 +108,14 @@ function MoviesCard({
       {
           fromSavedPage ?
             (<button
-              className="movieCard__button_disLike hover-button"
+              className="movieCard__button movieCard__button_disLike hover-button"
               type="button"
               onClick={hadleRemoveBtn}
               />
             ) :
             (
               <button
-                className={`movieCard__button ${isSavedState && 'movieCard__button_liked'} hover-button`}
+                className={`movieCard__button movieCard__button_liked ${isSavedState && 'movieCard__button_disLike'} hover-button`}
                 type="button"
                 onClick={handleSaveBtn}
               />

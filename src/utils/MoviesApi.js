@@ -8,9 +8,7 @@ class MoviesApi {
     return fetch(`${this._url}/beatfilm-movies`, {
       method: "GET",
       headers: this._headers,
-      credentials:'include',
-      mode: "cors",
-    })
+                })
       .then(res => this._checkRequestResult(res))
   }
 
@@ -29,7 +27,7 @@ const moviesApi = new MoviesApi({
     'Content-Type': 'application/json',
     
   },
-  credentials:'include',
+  
 });
 
 export default moviesApi;
