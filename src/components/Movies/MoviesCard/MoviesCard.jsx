@@ -41,6 +41,7 @@ function MoviesCard({
   const minutesString = minutes > 0 ? `${minutes} мин` : '';
 
   const hadleRemoveBtn = () => {
+    console.log(currentMovieId)
     deleteMovie(localStorage.getItem('jwt'), currentMovieId)
       .then(() => {
         setIsSavedState(false);
