@@ -52,14 +52,15 @@ export const getSavedMovies = (token) => {
   }).then(checkAnswer);
 }
 
-export const deleteMovie = async (token, id) => {
-  const response = await fetch(`${BASE_URL}/movies/${id}`, {
+export const deleteMovie = (token, id) => {
+  return fetch(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-      'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'},
+      
+    },
+    credentials:'include',
   }).then(checkAnswer);
 }
 
