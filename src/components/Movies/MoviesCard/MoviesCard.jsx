@@ -42,7 +42,7 @@ function MoviesCard({
 
   const hadleRemoveBtn = () => {
     console.log(currentMovieId)
-    deleteMovie(localStorage.getItem('jwt'), currentMovieId)
+    deleteMovie(localStorage.getItem('jwt'), movieId)
       .then(() => {
         setIsSavedState(false);
         setCurrentMovieId('');
