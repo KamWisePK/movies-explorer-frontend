@@ -51,7 +51,8 @@ function MoviesCard({
         // }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
+        console.log(currentMovieId);
       });
   };
 
@@ -74,8 +75,9 @@ function MoviesCard({
       })
         .then((movie) => {
           setIsSavedState(true);
-          setCurrentMovieId(movie._id);
-          console.log(currentMovieId)
+          setCurrentMovieId(movie.data._id);
+          console.log(movie)
+          console.log(movie.data._id)
         })
         .catch((error) => {
           console.log(error);
