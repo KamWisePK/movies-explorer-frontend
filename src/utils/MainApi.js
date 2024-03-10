@@ -90,3 +90,4 @@ export const updateUserInfo = (token, userData) => {
 }
 
 const checkAnswer = res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.statusText}`);
+////
