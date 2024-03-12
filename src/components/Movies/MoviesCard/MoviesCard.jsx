@@ -1,127 +1,46 @@
-import React, { useState } from 'react';
 
 import './MoviesCard.css';
 
-import { saveMovie, deleteMovie } from '../../../utils/MainApi';
-import { CurrentUserContext } from '../../Context/CurrentUserContext';
 
-function MoviesCard({
-  fromSavedPage,
-  country,
-  director,
-  duration,
-  year,
-  description,
-  image,
-  trailerLink,
-  nameRU,
-  nameEN,
-  thumbnail,
-  movieId,
-  savedMovies,
-  cardsUpdate,
-  setCardsUpdate,
-}) {
-  const currentUser = React.useContext(CurrentUserContext);
-
-  const [isSavedState, setIsSavedState] = useState(
-    savedMovies.some((movie) => {
-      return movie.movieId === movieId && movie.owner === currentUser._id;
-    })
-  );
-  const [currentMovieId, setCurrentMovieId] = useState(
-    savedMovies.find((movie) => {
-      return movie.movieId === movieId && movie.owner === currentUser._id;
-    }) || ''
-  );
-
-  const hours = Math.trunc(duration / 60);
-  const minutes = duration % 60;
-  const hoursString = hours > 0 ? `${hours} ч` : '';
-  const minutesString = minutes > 0 ? `${minutes} мин` : '';
-
-  const hadleRemoveBtn = () => {
-    console.log(currentMovieId)
-    deleteMovie(localStorage.getItem('jwt'), currentMovieId)
-      .then(() => {
-        setIsSavedState(false);
-        setCurrentMovieId('');
-        // if (cardsUpdate) {
-        setCardsUpdate(cardsUpdate + 1);
-        // }
-      })
-      .catch((error) => {
-        console.log(error)
-        console.log(currentMovieId);
-      });
+function MoviesCard({ movie, isSavedFilms, savedMovies, liked, handleLikeMovie, onDeleteMovie }) {
+  
+  function onDelete() {
+    onDeleteMovie(movie);
   };
 
-  const handleSaveBtn = () => {
-    if (isSavedState) {
-      hadleRemoveBtn();
-    } else {
-      saveMovie(localStorage.getItem('jwt'), {
-        country: country,
-        director: director,
-        duration: duration,
-        year: year,
-        description: description,
-        image: image,
-        trailerLink: trailerLink,
-        nameRU: nameRU,
-        nameEN: nameEN,
-        thumbnail: thumbnail,
-        movieId: movieId,
-      })
-        .then((movie) => {
-          setIsSavedState(true);
-          setCurrentMovieId(movie.data._id);
-          console.log(movie)
-          console.log(movie.data._id)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+function handleLikeToggle() {
+  if (liked) {
+    onDeleteMovie(savedMovies.filter((obj) => obj.movieId === movie.id)[0]);
+  } else {
+    handleLikeMovie(movie);
+  }
+};
 
-  React.useEffect(() => {
-    const isSaved = savedMovies.some((movie) => {
-      return movie.movieId === movieId && movie.owner === currentUser._id;
-    });
-
-    const currentMovie =
-      savedMovies.find((movie) => {
-        return movie.movieId === movieId && movie.owner === currentUser._id;
-      }) || '';
-
-    setIsSavedState(isSaved);
-    setCurrentMovieId(currentMovie._id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [savedMovies]);
+function getMovieDuration(mins) {
+  return `${Math.floor(mins / 60)}ч ${mins % 60}м`;
+};
 
   return (
     <li className='movieCard'>
       <div className='movieCard__container'>
-        <h2 className='movieCard__title'>{nameRU}</h2>
-        <p className='movieCard__duration'>{`${hoursString} ${minutesString}`}</p>
+        <h2 className='movieCard__title'>{movie.nameRU}</h2>
+        <p className='movieCard__duration'>{getMovieDuration(movie.duration)}</p>
       </div>
-      <a href={trailerLink} >
-        <img className='movieCard__img' alt='Кадр или постер к фильму' src={image} />
+      <a href={movie.trailerLink} >
+        <img className='movieCard__img' alt='Кадр или постер к фильму' src={ isSavedFilms ? movie.image: `https://api.nomoreparties.co/${movie.image.url}`} />
       </a>
-      {
-          fromSavedPage ?
-            (<button
+      {isSavedFilms ? (
+            <button
               className="movieCard__button movieCard__button_disLike hover-button"
               type="button"
-              onClick={hadleRemoveBtn}
+              onClick={onDelete}
               />
             ) :
             (
               <button
-                className={`movieCard__button movieCard__button_liked ${isSavedState && 'movieCard__button_disLike'} hover-button`}
+                className={`movieCard__button movieCard__button_liked ${liked && 'movieCard__button_disLike'} hover-button`}
                 type="button"
-                onClick={handleSaveBtn}
+                onClick={handleLikeToggle}
               />
             )
         }

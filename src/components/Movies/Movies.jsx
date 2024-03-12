@@ -1,116 +1,124 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import './Movies.css';
 
-import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
+
 
 import moviesApi from '../../utils/MoviesApi';
-import { getSavedMovies } from '../../utils/MainApi';
 
 import '../Hover/Hover.css';
 
-function Movies({ loggedIn,  firstSubmit, setFirstSubmit }) {
-  const [cards, setCards] = React.useState(JSON.parse(localStorage.getItem('cards')) || []);
-  const [fCards, setFCards] = React.useState(JSON.parse(localStorage.getItem('fCards')) || []);
-  const [loading, setLoading] = React.useState(false);
-  const [request, setRequest] = React.useState(localStorage.getItem('request') || '');
-  const [shorts, setShorts] = React.useState(localStorage.getItem('shorts') === 'true');
-  const [requestError, setRequestError] = React.useState(false);
-  const [isInitial, setIsInitial] = React.useState(true);
-  const [savedMovies, setSavedMoives] = React.useState([]);
+export default function  Movies({ savedMovies, handleLikeMovie, onDeleteMovie }) {
+  const [moviesWithSelector, setmoviesWithSelector] = useState(false);
+  const [isReqError, setisReqError] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [initialCardsMovies, setInitialCardsMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const filterCards = () => {
-    return cards.filter((element) => {
-      if (!shorts && element.duration < 40) return false;
-      else if (
-        element.nameRU.toLowerCase().includes(request.toLowerCase()) ||
-        element.nameEN.toLowerCase().includes(request.toLowerCase())
-      )
-        return true;
-      else return false;
-    });
+  
+  function filterDuration(movies) {
+    return movies.filter((movie) => movie.duration <= 40);
+  };
+  
+  function handleShortMoviesFilter() {
+    setmoviesWithSelector(!moviesWithSelector);
+    if (!moviesWithSelector) {
+      if (filterDuration(initialCardsMovies).length === 0) {
+        setFilteredMovies(filterDuration(initialCardsMovies));
+      } else {
+        setFilteredMovies(filterDuration(initialCardsMovies));
+      }
+    } else {
+      setFilteredMovies(initialCardsMovies);
+    }
+    localStorage.setItem("moviesSelector", !moviesWithSelector);
   };
 
-  const onSubmitForm = () => {
-    if (firstSubmit) {
-      setIsInitial(false);
-      setLoading(true);
-      setFirstSubmit(false);
-      moviesApi
-        .getInitalCardsList()
-        .then((initalCards) => {
-          console.log(initalCards)
-          setCards(initalCards);
-          localStorage.setItem('cards', JSON.stringify(initalCards));
-          localStorage.setItem('request', request);
-          localStorage.setItem('shorts', shorts);
-          setFCards(filterCards());
-          setLoading(false);
-        })
-        .catch((error) => {
-          
-          setLoading(false);
-          console.log(...error);
-          setRequestError(true);
-        });
+  function filterMovies(movies, query) {
+    const moviesQuery = movies.filter((movie) => {
+      const movieRu = String(movie.nameRU).toLowerCase().trim();
+      const movieEn = String(movie.nameEN).toLowerCase().trim();
+      const userQuery = query.toLowerCase().trim();
+    return (
+      movieRu.indexOf(userQuery) !== -1 || movieEn.indexOf(userQuery) !== -1
+    )
+    })
+    return moviesQuery;
+  };
+
+  function updateFilteredMoviesList(movies, query, short) {
+    const moviesCardsList = filterMovies(movies, query, short);
+    setInitialCardsMovies(moviesCardsList);
+    setFilteredMovies(short ? filterDuration(moviesCardsList) : moviesCardsList);
+    localStorage.setItem("movies", JSON.stringify(moviesCardsList));
+    localStorage.setItem("allMovies", JSON.stringify(movies));
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("moviesSelector") === "true") {
+      setmoviesWithSelector(true);
     } else {
-      localStorage.setItem('request', request);
-      localStorage.setItem('shorts', shorts);
-      setFCards(filterCards());
+      setmoviesWithSelector(false);
+    }
+  }, []);
+
+  function handleGetMovies(query) {
+    localStorage.setItem("moviesInputSearch", query);
+    localStorage.setItem("moviesSelector", moviesWithSelector);
+
+    if (localStorage.getItem("allMovies")) {
+      const movies = JSON.parse(localStorage.getItem("allMovies"));
+      updateFilteredMoviesList(movies, query, moviesWithSelector);
+    } else {
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then((movieContent) => {
+          updateFilteredMoviesList(movieContent, query, moviesWithSelector);
+          setisReqError(false);
+        })
+        .catch((err) => {
+          setisReqError(true);
+          console.log(`Ошибка при поиске фильмов ${err}`);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
     }
   };
 
-  React.useEffect(() => {
-    getSavedMovies(localStorage.getItem('jwt'))
-      .then((data) => {
-        setSavedMoives(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // console.log(filterCards());
-    // setFCards(filterCards());
-  }, [fCards]);
+  useEffect(() => {
+    if (localStorage.getItem("moviesInputSearch")) {
+      if (filteredMovies.length === 0) {
+        setIsNotFound(true);
+      } else {
+        setIsNotFound(false);
+      }
+    } else {
+      setIsNotFound(false);
+    }
+  }, [filteredMovies]);
 
-  React.useEffect(() => {
-    localStorage.setItem('fCards', JSON.stringify(fCards));
-    setFCards(filterCards());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cards]);
-
-  React.useEffect(() => {
-    localStorage.setItem('shorts', shorts);
-    setFCards(filterCards());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shorts]);
+  useEffect(() => {
+    if (localStorage.getItem("movies")) {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      setInitialCardsMovies(movies);
+      if (localStorage.getItem("moviesSelector") === "true") {
+        setFilteredMovies(filterDuration(movies));
+      } else {
+        setFilteredMovies(movies);
+      }
+    }
+  }, []);
 
   return (
-    <>
-    <Header loggedIn={loggedIn}/>
-    <section className='movies'>
-      <SearchForm
-        request={request}
-        setRequest={setRequest}
-        onSubmit={onSubmitForm}
-        shorts={shorts}
-        setShorts={setShorts}
-      />
-      {loading ? (
-        <Preloader />
-      ) : (
-        <MoviesCardList
-          isInitial={isInitial}
-          cards={fCards}
-          requestError={requestError}
-          savedMovies={savedMovies}
-        />
-      )}
-    </section>
-    </>
-  );
+    <main className="movies">
+      <SearchForm handleGetMovies={handleGetMovies} moviesWithSelector={moviesWithSelector} onFilterMovies={handleShortMoviesFilter}/>
+      <MoviesCardList cards={filteredMovies} isReqError={isReqError} isNotFound={isNotFound} isLoading={isLoading} isSavedFilms={false} savedMovies={savedMovies} handleLikeMovie={handleLikeMovie} onDeleteMovie={onDeleteMovie}/>
+    </main>
+  )
 }
 
-export default Movies;
+

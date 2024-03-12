@@ -29,6 +29,7 @@
   text-align: center;
   cursor: pointer;
 }
+
 @media screen and (max-width: 1000px) {
   .moviesCardList__list {
        grid-gap: 35px 24px;

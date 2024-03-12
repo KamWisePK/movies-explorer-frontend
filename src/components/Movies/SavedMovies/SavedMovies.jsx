@@ -2,105 +2,64 @@ import React from 'react';
 
 import './SavedMovies.css';
 
-import Header from '../../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../../Preloader/Preloader';
 
-import { getSavedMovies } from '../../../utils/MainApi';
+import { useState, useEffect } from "react";
 
-import { CurrentUserContext } from '../../Context/CurrentUserContext';
+function SavedMovies({ savedMovies, isLoading, onDeleteMovie }) {
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [savedMoviesSearch, setsavedMoviesSearch] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [moviesWithSelector, setmoviesWithSelector] = useState(false);
 
-function SavedMovies({ loggedIn }) {
-  const [savedMovies, setSavedMoives] = React.useState([]);
-  const [savedFilteredMovies, setSavedFilteredMovies] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [isInitial, setIsInitial] = React.useState(true);
-  const [request, setRequest] = React.useState('');
-  const [shorts, setShorts] = React.useState(true);
-  const [cardsUpdate, setCardsUpdate] = React.useState(0);
-
-  const currentUser = React.useContext(CurrentUserContext);
-
-  const onSubmitForm = () => {
-    setIsInitial(false);
-
-    const filteredCards = savedMovies.filter((element) => {
-      if (!shorts && element.duration < 40) return false;
-      else if (element.owner !== currentUser._id) {
-        return false;
-      } else if (
-        element.nameRU.toLowerCase().includes(request.toLowerCase()) ||
-        element.nameEN.toLowerCase().includes(request.toLowerCase())
-      )
-        return true;
-      else return false;
-    });
-
-    setSavedFilteredMovies(filteredCards);
+  function handleShortMoviesFilter() {
+    setmoviesWithSelector(!moviesWithSelector);
   };
 
-  React.useEffect(() => {
-    setLoading(true);
-    getSavedMovies(localStorage.getItem('jwt'))
-      .then((data) => {
-        setLoading(false);
+  function handleGetMovies(search) {
+    setsavedMoviesSearch(search);
+  };
 
-        const userData = data.filter((movie) => {
-          return movie.owner === currentUser._id;
-        });
+  function filterDuration(movies) {
+    return movies.filter((movie) => movie.duration <= 40);
+  };
 
-        setSavedMoives(userData);
-        setSavedFilteredMovies(userData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [cardsUpdate, currentUser._id]);
+  function filterMovies(movies, search) {
+    const moviesSearch = movies.filter((movie) => {
+      const movieRu = String(movie.nameRU).toLowerCase().trim();
+      const movieEn = String(movie.nameEN).toLowerCase().trim();
+      const userSearch = search.toLowerCase().trim();
+    return (
+      movieRu.indexOf(userSearch) !== -1 || movieEn.indexOf(userSearch) !== -1
+    )
+    })
+    return moviesSearch;
+  };
 
-  React.useEffect(() => {
-    const filteredCards = savedMovies.filter((movie) => {
-      if (!shorts && movie.duration < 40) return false;
-      else if (movie.owner !== currentUser._id) {
-        return false;
-      } else if (
-        movie.nameRU.toLowerCase().includes(request.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(request.toLowerCase())
-      )
-        return true;
-      else return false;
-    });
+  useEffect(() => {
+    if (filteredMovies.length === 0) {
+      setIsNotFound(true);
+    } else {
+      setIsNotFound(false);
+    }
+  }, [filteredMovies]);
 
-    setSavedFilteredMovies(filteredCards);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shorts]);
-
+  useEffect(() => {
+    const moviesCardsList = filterMovies(savedMovies, savedMoviesSearch);
+    setFilteredMovies(
+      moviesWithSelector ? filterDuration(moviesCardsList) : moviesCardsList
+    )
+  }, [savedMovies, moviesWithSelector, savedMoviesSearch]);
+  
   return (
-    <>
-    <Header loggedIn={loggedIn}/>
-    <section className='SavedMovies'>
-      <SearchForm
-        request={request}
-        setRequest={setRequest}
-        onSubmit={onSubmitForm}
-        shorts={shorts}
-        setShorts={setShorts}
-      />
-      {loading ? (
-        <Preloader />
-      ) : (
-        <MoviesCardList
-          isInitial={isInitial}
-          cards={savedFilteredMovies}
-          fromSavedPage={true}
-          savedMovies={savedMovies}
-          cardsUpdate={cardsUpdate}
-          setCardsUpdate={setCardsUpdate}
-        />
-      )}
-    </section>
-    </>
-  );
+    <main className="movies">
+      {isLoading && <Preloader />}
+      <SearchForm handleGetMovies={handleGetMovies} onFilterMovies={handleShortMoviesFilter}/>
+      <MoviesCardList isSavedFilms={true} savedMovies={savedMovies} onDeleteMovie={onDeleteMovie} cards={filteredMovies} isNotFound={isNotFound}/>
+    </main>
+  )
 }
 
 export default SavedMovies;
