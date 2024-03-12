@@ -7,14 +7,14 @@
 }
 
 .header_bgc_blue {
-  background: red;
+  background: #073042;
 }
 
 .header__sign-up {
   min-height: 32px;
   background: transparent;
   border: none;
-  color: red;
+  color: #ffffff;
   cursor: pointer;
 }
 
