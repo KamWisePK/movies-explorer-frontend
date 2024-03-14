@@ -1,14 +1,14 @@
-.profile {
-  margin: 70px auto 0 ;
+.register {
+  margin: 70px 442px 0;
   display: flex;
   flex-direction: column;
   height: 100dvh;
   align-items: flex-start;
-  width: 410px;
+  width: 396px;
   align-self: center;
 }
-.profile__title {
-  margin: 5px 0 120px;
+.register__title {
+  margin: 40px 0 40px;
   color: rgb(255, 255, 255);
    
   font-size: 24px;
@@ -16,29 +16,22 @@
   line-height: 29px;
   letter-spacing: 0px;
   text-align: left;
-  align-self: center;
-  padding-right: 13px;
 }
-.profile__form {
+.register__form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.profile__container {
+.register__container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 5px;
   border-style: none;
-
+  border-bottom: solid 1px rgb(66, 66, 66);
   padding: 0 0 10px 0;
   margin: 0 0 0 0;
 }
-.profile__container:first-of-type {
-  border-bottom: solid 1px rgb(66, 66, 66);
-}
-
-.profile__label {
+.register__label {
   color: rgb(139, 139, 139);
    
   font-size: 10px;
@@ -47,20 +40,20 @@
   letter-spacing: 0px;
   text-align: left;
 }
-.profile__input {
+.register__input {
   color: rgb(255, 255, 255);
    
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
   letter-spacing: 0px;
-  text-align: right;
+  text-align: left;
   border-style: none;
   background-color: #202020;
   outline: none;
 }
 
-.profile__error {
+.register__error {
   color: rgb(238, 52, 101);
    
   font-size: 10px;
@@ -72,45 +65,30 @@
   margin-top: 5px;
 }
 
-.profile__editButton {
-  width: 410px;
-  height: 16px;
+.register__submitButton {
+  width: 396px;
+  height: 45px;
   border-radius: 3px;
-  background-color: #202020;
+  background-color: rgb(66, 133, 244);
   color: rgb(255, 255, 255);
    
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: center;
-  border-style: none;
-  padding: 0;
-  padding-right: 13px;
-  margin: 180px 0 16px;
-  cursor: pointer;
-}
-
-.profile__exitButton {
-  width: 410px;
-  height: 16px;
-  border-radius: 3px;
-  background-color: #202020;
-  color: rgb(238, 52, 101);
-   
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 17px;
   letter-spacing: 0px;
   text-align: center;
   border-style: none;
   padding: 0;
-  margin: 0;
-  padding-right: 13px;
+  margin: 128px 0 16px;
   cursor: pointer;
 }
 
-.profile__text {
+.register__submitButton:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.register__text {
   align-self: center;
   color: rgb(139, 139, 139);
    
@@ -122,7 +100,7 @@
   margin: 0;
   padding: 0;
 }
-.profile__link {
+.register__link {
   color: rgb(66, 133, 244);
    
   font-size: 14px;
@@ -141,54 +119,54 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   box-shadow: 0 0 0 30px #202020 inset !important;
 }
-
 @media screen and (max-width: 990px) {
-  .profile {
-    margin: 236px auto 0;
+  .register {
+    margin: 56px auto 0;
     display: flex;
     flex-direction: column;
     height: 100dvh;
-    align-items: flex-start;
+    align-items: center;
     width: 410px;
     align-self: center;
   }
-  .profile__title {
-    margin: 5px 0 96px;
+  .register__title {
+    margin: 50px 0 96px;
   }
-  .profile__editButton {
+  .register__editButton {
     margin: 170px 0 16px;
   }
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
 }
 @media screen and (max-width: 767px) {
-  .profile {
-    margin: 70px auto 0; 
+  .register {
+    margin: 56px auto 0;
     width: 300px;
-    
   }
 
-  .profile__editButton {
+  .register__submitButton {
     width: 300px;
-    
   }
-  
-  .profile__exitButton {
-    width: 300px;
-    margin: 0 10px;
-   
 
-} 
-.profile__title {
-  margin: 50px 0 80px;
-}
-.profile__form {
-  display: flex;
-  flex-direction: column;
-  width: 260px;
-  align-self: center;
-}
+  .register__title {
+    margin: 50px 0 80px;
+  }
+  .register__form {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    align-self: center;
+  }
 
-.profile__editButton {
-  width: 300px;
-  margin: 330px 0 16px;
-}
+  .register__submitButton {
+    width: 260px;
+    margin: 215px 0 16px;
+  }
 }
