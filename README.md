@@ -6,4 +6,5 @@
 
 ссылка на пул реквест #2
 
-ссылка на фронтэнд https://github.com/KamWisePK/movies-explorer-frontend
+ссылка на фронтэнд https://diplomyandex.movies.nomoredomainswork.ru/
+
