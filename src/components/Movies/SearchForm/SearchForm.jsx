@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import './SearchForm.css';
 
@@ -8,7 +8,18 @@ export default function SearchForm({ handleGetMovies, moviesWithSelector, onFilt
   const [textError, setTextError] = useState(false);
   const { pathname } = useLocation();
 
+  let searchInput = document.getElementById('searchFormInput');
+
+  function blockSearchForm() {
+    searchInput.disabled = true;
+  }
+
+  function unblockSearchForm() {
+    searchInput.disabled = false;
+  }
+
   function handleSubmit(evt) {
+    blockSearchForm();
     evt.preventDefault();
     if (inputSearch.trim().length === 0) {
       setTextError(true);
@@ -16,6 +27,7 @@ export default function SearchForm({ handleGetMovies, moviesWithSelector, onFilt
       setTextError(false);
       handleGetMovies(inputSearch);
     }
+    unblockSearchForm();
   }
 
   function handleInputChange(evt) {
@@ -23,15 +35,11 @@ export default function SearchForm({ handleGetMovies, moviesWithSelector, onFilt
   }
 
   useEffect(() => {
-    if (
-      pathname === "/movies" &&
-      localStorage.getItem("moviesInputSearch")
-    ) {
-      const localQuery = localStorage.getItem("moviesInputSearch");
+    if (pathname === '/movies' && localStorage.getItem('moviesInputSearch')) {
+      const localQuery = localStorage.getItem('moviesInputSearch');
       setInputSearch(localQuery);
     }
-  }, [pathname])
-
+  }, [pathname]);
 
   return (
     <section className='searchForm'>
@@ -42,26 +50,24 @@ export default function SearchForm({ handleGetMovies, moviesWithSelector, onFilt
           id='searchFormInput'
           type='text'
           placeholder='Фильм'
-          value={inputSearch || ""} onChange={handleInputChange}
+          value={inputSearch || ''}
+          onChange={handleInputChange}
         ></input>
         <button type='submit' className='searchForm__button hover-button'>
           Поиск
         </button>
         <label className='filterCheckbox' for='ShortMovies'>
-      <input
-        className='filterCheckbox__input'
-        type='checkbox'
-        id='ShortMovies'
-        checked={moviesWithSelector} onChange={onFilterMovies}
-      />
-      <span className='filterCheckbox__inner'>Короткометражки</span>
-    </label>
-        {textError && (<div className="search-form__error">Нужно ввести ключевое слово</div>)}
-      
-        
+          <input
+            className='filterCheckbox__input'
+            type='checkbox'
+            id='ShortMovies'
+            checked={moviesWithSelector}
+            onChange={onFilterMovies}
+          />
+          <span className='filterCheckbox__inner'>Короткометражки</span>
+        </label>
+        {textError && <div className='search-form__error'>Нужно ввести ключевое слово</div>}
       </form>
     </section>
   );
 }
-
-

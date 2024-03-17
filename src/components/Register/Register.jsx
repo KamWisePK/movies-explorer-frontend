@@ -64,10 +64,27 @@ function Register({ onRegister }) {
     }
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  let nameInput = document.getElementById('name');
+  let emailInput = document.getElementById('email');
+  let passwordInput = document.getElementById('password');
 
+  function blockRegisterForm() {
+    nameInput.disabled = true;
+    emailInput.disabled = true;
+    passwordInput.disabled = true;
+  }
+
+  function unblockRegisterForm() {
+    nameInput.disabled = false;
+    emailInput.disabled = false;
+    passwordInput.disabled = false;
+  }
+
+  const handleSubmit = (evt) => {
+    blockRegisterForm();
+    evt.preventDefault();
     onRegister(userData);
+    unblockRegisterForm();
   };
 
   const blurHandler = (evt) => {
@@ -91,6 +108,9 @@ function Register({ onRegister }) {
       setFormValid(true);
     }
   }, [nameError, emailError, passwordError]);
+
+  
+  
 
   return (
     <section className='register'>

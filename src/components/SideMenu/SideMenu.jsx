@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './SideMenu.css';
 
@@ -10,19 +10,19 @@ function SideMenu ({ isOpened, onClose }) {
         <div className='sideMenu__container'>
           <button className='sideMenu__button_close hover-button' onClick={onClose} type='button' />
           <div className='sideMenu__nav_container'>
-            <Link to='/' className='sideMenu__link hover-link'>
+            <NavLink to='/' className='sideMenu__link hover-link'>
               Главная
-            </Link>
-            <Link to='/movies' className='sideMenu__link  hover-link'>
+            </NavLink>
+            <NavLink to='/movies' className='sideMenu__link  hover-link'>
               Фильмы
-            </Link>
-            <Link to='/saved-movies' className='sideMenu__link  hover-link'>
+            </NavLink>
+            <NavLink to='/saved-movies' className='sideMenu__link  hover-link'>
               Сохранённые фильмы
-            </Link>
+            </NavLink>
           </div>
-          <Link to='/profile'>
+          <NavLink to='/profile' className='sideMenu__link'>
             <button className='sideMenu__button_account hover-button'></button>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </section>

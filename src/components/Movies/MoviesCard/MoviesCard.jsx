@@ -1,9 +1,11 @@
+import { useLocation } from "react-router-dom";
 
 import './MoviesCard.css';
 
 
 function MoviesCard({ movie, isSavedFilms, savedMovies, liked, handleLikeMovie, onDeleteMovie }) {
-  
+  const location = useLocation();
+
   function onDelete() {
     onDeleteMovie(movie);
   };
@@ -29,7 +31,7 @@ function getMovieDuration(mins) {
       <a href={movie.trailerLink} >
         <img className='movieCard__img' alt='Кадр или постер к фильму' src={ isSavedFilms ? movie.image: `https://api.nomoreparties.co/${movie.image.url}`} />
       </a>
-      {isSavedFilms ? (
+      {isSavedFilms && location.pathname === "/saved-movies" ? (
             <button
               className="movieCard__button movieCard__button_disLike hover-button"
               type="button"
@@ -38,7 +40,7 @@ function getMovieDuration(mins) {
             ) :
             (
               <button
-                className={`movieCard__button movieCard__button_liked ${liked && 'movieCard__button_disLike'} hover-button`}
+                className={`movieCard__button movieCard__button_notLiked ${liked && 'movieCard__button_liked'} hover-button`}
                 type="button"
                 onClick={handleLikeToggle}
               />

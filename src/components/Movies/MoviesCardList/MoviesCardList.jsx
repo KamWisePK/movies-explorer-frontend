@@ -28,9 +28,9 @@ function MoviesCardList({
     if (display > 1200) {
       setShownMovies(12);
     } else if (display > 900) {
-      setShownMovies(9);
-    } else if (display > 767) {
       setShownMovies(8);
+    } else if (display > 767) {
+      setShownMovies(5);
     } else {
       setShownMovies(5);
     }
@@ -43,9 +43,9 @@ function MoviesCardList({
   function handleMore() {
    const display = window.innerWidth;
     if (display > 1200) {
-      setShownMovies(shownMovies + 4);
-    } else if (display > 900) {
       setShownMovies(shownMovies + 3);
+    } else if (display > 900) {
+      setShownMovies(shownMovies + 2);
     } else if (display > 768) {
       setShownMovies(shownMovies + 2);
     } else {
@@ -56,7 +56,7 @@ function MoviesCardList({
   return (
     <section className="cards">
       {isLoading && <Preloader />}
-      {isNotFound && !isLoading && (<span className="cards__info">Ничего не найдено</span>)}
+      {isNotFound && !isLoading && (<div className='cards__info-wrapper'><span className="cards__info">Ничего не найдено</span></div>)}
       {isReqError && !isLoading && (
         <span className="cards__info">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span>
       )}

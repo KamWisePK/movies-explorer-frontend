@@ -20,6 +20,9 @@ function Login({ onLogin, loginError }) {
 
   const [formValid, setFormValid] = React.useState(false);
 
+  let emailInput = document.getElementById('email');
+  let passwordInput = document.getElementById('password');
+
   React.useEffect(() => {
     if (emailError || passwordError) {
       setFormValid(false);
@@ -58,9 +61,11 @@ function Login({ onLogin, loginError }) {
   };
 
   const handleSubmit = (evt) => {
+    blockLoginForm();
    evt.preventDefault();
-console.log(userData)
+
     onLogin(userData);
+    unblockLoginForm();
   };
 
   const blurHandler = (evt) => {
@@ -73,6 +78,16 @@ console.log(userData)
         break;
     }
   };
+
+  function blockLoginForm() {
+    emailInput.disabled = true;
+    passwordInput.disabled = true;
+  }
+
+  function unblockLoginForm() {
+    emailInput.disabled = false;
+    passwordInput.disabled = false;
+  }
 
   return (
     <section className='login'>

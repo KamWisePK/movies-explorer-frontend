@@ -10,6 +10,7 @@
 
 .searchForm__label {
 }
+
 .searchForm__input {
   box-sizing: border-box;
   border: 1.5px solid rgb(170, 170, 170);
@@ -26,6 +27,7 @@
   padding: 25px;
   margin-bottom: 26px;
 }
+
 .searchForm__button {
   border-radius: 5px;
   border-style: none;

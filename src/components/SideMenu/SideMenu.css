@@ -65,6 +65,10 @@
   padding-bottom: 6px;
 }
 
+.sideMenu__link:last-of-type {
+ margin-bottom: 90px;
+}
+
 .sideMenu__button_account {
   font-size: 14px;
   font-weight: 500;
@@ -74,7 +78,7 @@
   background-color: rgb(49, 49, 49);
   border: none;
   cursor: pointer;
-  margin-bottom: 90px;
+  margin:0;
   background: url(../../images/sideMenu_acc-btn.svg) no-repeat;
   width: 100px;
   height: 30px;
@@ -85,4 +89,9 @@
   .sideMenu__container {
     width: 100%;
   }
+}
+
+.active{
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgb(8, 251, 97);
 }

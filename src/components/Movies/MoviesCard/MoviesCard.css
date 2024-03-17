@@ -51,7 +51,7 @@
   color: rgb(255, 255, 255);
   text-align: center;
   border-radius: 30px;
-  background: rgb(248, 5, 5);
+  background: #313131;
   border-style: none;
   transition: background-color 0.3s;
   width: 100px;
@@ -62,8 +62,12 @@
   cursor: pointer;
 }
 
+.movieCard__button_notLiked {
+  background-image: url('../../../images/movieCard__button_notLiked.svg');
+}
+
 .movieCard__button_liked {
-  background-image: url('../../../images/likedMovie.svg');
+  background-image: url('../../../images/movieCard__button_Liked.svg');
 }
 
 .movieCard__button_disLike {
