@@ -4,7 +4,7 @@
 
 Выбран макет dark-4
 
-ссылка на пул реквест #2
+ссылка на пул реквест https://github.com/KamWisePK/movies-explorer-frontend/pull/2
 
 ссылка на фронтэнд https://diplomyandex.movies.nomoredomainswork.ru/
 
