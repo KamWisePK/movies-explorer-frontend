@@ -59,10 +59,6 @@
   outline: none;
 }
 
-.profile__input_yellow{
-
-}
-
 .profile__input_yellow::placeholder{
   color: rgb(72, 237, 237);
 }
@@ -71,10 +67,11 @@
   color: rgb(238, 52, 101);
   font-size: 13px;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 18px;
   letter-spacing: 0px;
   text-align: left;
   margin-top: 15px;
+
 }
 
 .profile__userChangeConfirmation {
@@ -127,25 +124,6 @@ display: block;
   padding: 0;
   padding-right: 13px;
   margin: 180px 0 16px;
-  cursor: pointer;
-}
-
-.profile__cancelEditionButton {
-  width: 410px;
-  height: 16px;
-  border-radius: 3px;
-  background-color: #202020;
-  color: rgb(236, 13, 13);
-
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: center;
-  border-style: none;
-  padding: 0;
-  padding-right: 13px;
-  margin: 50px 0 16px;
   cursor: pointer;
 }
 

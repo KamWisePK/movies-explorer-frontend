@@ -25,33 +25,37 @@ function MoviesCardList({
 
   function handlerResize() {
     const display = window.innerWidth;
-    if (display > 1200) {
+    if (display > 1122) {
       setShownMovies(12);
-    } else if (display > 900) {
+    } else if (display > 724) {
       setShownMovies(8);
-    } else if (display > 767) {
+    } else  {
       setShownMovies(5);
-    } else {
-      setShownMovies(5);
-    }
+    } 
+    
   };
 
   useEffect(() => {
-    handlerResize();
-  }, [])
+    window.addEventListener('watchResize', handlerResize());
+    return () => {
+        window.removeEventListener('watchResize', handlerResize());
+    }
+    ;
+  }, [cards])
+
 
   function handleMore() {
    const display = window.innerWidth;
-    if (display > 1200) {
+    if (display > 1122) {
       setShownMovies(shownMovies + 3);
-    } else if (display > 900) {
+    } else if (display > 724) {
       setShownMovies(shownMovies + 2);
-    } else if (display > 768) {
+    } else  {
       setShownMovies(shownMovies + 2);
-    } else {
-      setShownMovies(shownMovies + 2);
-    }
+    } 
   }
+
+  
 
   return (
     <section className="cards">

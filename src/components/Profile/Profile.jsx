@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 
 import './Profile.css';
 
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function Profile({ onUpdateUser, onSignOut }) {
+function Profile({ onUpdateUser, onSignOut, profileUpdateInfo,setProfileUpdateInfo }) {
   const currentUser = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({
     email: '',
@@ -21,6 +21,51 @@ function Profile({ onUpdateUser, onSignOut }) {
   const [formValid, setFormValid] = useState(false);
 
   const [isEditing, setEditing] = useState(false);
+
+  const [sameValues, setSameValues] = useState('');
+
+  const resetUserData = useCallback(
+    (newUserData = {}, newNameError = false, newEmailError = false) => {
+      setUserData(newUserData);
+      setNameError(newNameError)
+      setEmailError(newEmailError)
+    },
+    [setUserData,setNameError,setEmailError]
+  );
+
+  useEffect(() => {
+    if (currentUser) {
+      resetUserData(currentUser);
+    }
+  }, [currentUser, resetUserData]);
+
+  useEffect(() => {
+    if (currentUser.name === userData.name && currentUser.email === userData.email) {
+      setSameValues(
+        'Для подтверждения изменения данных, хотя бы одно из значений должно отличаться от текущих'
+      );
+      setFormValid(false);
+    } else if (nameError || emailError) {
+      setSameValues('');
+      setFormValid(false);
+    } else {
+      setSameValues('');
+      setFormValid(true);
+    }
+  }, [nameError, emailError, sameValues, currentUser, userData]);
+
+
+
+  const blurHandler = (evt) => {
+    switch (evt.target.name) {
+      case 'name':
+        setNameDirty(true);
+        break;
+      case 'email':
+        setEmailDirty(true);
+        break;
+    }
+  };
 
   function editFormClick() {
     setEditing(!isEditing);
@@ -42,8 +87,6 @@ function Profile({ onUpdateUser, onSignOut }) {
           setEmailError('Email не может быть пустым');
         } else if (!value.match(reEmail)) {
           setEmailError('Необходимо указать e-mail в формате name@domain.zone');
-        } else if (value === currentUser.email) {
-          setEmailError('Новый E-mail должен отличаться от текущего');
         } else {
           setEmailError('');
         }
@@ -56,45 +99,39 @@ function Profile({ onUpdateUser, onSignOut }) {
           setNameError('Имя должно быть не короче 2 символов');
         } else if (!value.match(reName)) {
           setNameError('Имя должно содержать только латиницу, кириллицу, пробел и дефис');
-        } else if (value === currentUser.name) {
-          setNameError('Новое имя должно отличаться от текущего');
         } else {
           setNameError('');
         }
         break;
     }
   };
+  
 
-  const handleSubmit = (evt) => {
+  
+
+const handleSubmit = (evt) => {
     evt.preventDefault();
     onUpdateUser(userData);
-    let spanElement = document.getElementById('profile__userChangeConfirmation');
-    spanElement.textContent = 'Данные успешно изменены';
-    setTimeout(() => (spanElement.textContent = ''), 2000);
+    setTimeout(() => (setProfileUpdateInfo('')), 2000);
+        
   };
 
-  const blurHandler = (evt) => {
-    switch (evt.target.name) {
-      case 'name':
-        setNameDirty(true);
-        break;
-      case 'email':
-        setEmailDirty(true);
-        break;
-    }
-  };
 
-  useEffect(() => {
-    if (nameError || emailError) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [nameError, emailError]);
 
-  const isValueSameAsWas =
-    !formValid || (currentUser.name === userData.name && currentUser.email === userData.email);
+  
+  // const handleSubmit = (evt) => {
+  //   evt.preventDefault();
+  //   let spanElement = document.getElementById('profile__userChangeConfirmation');
+  //   onUpdateUser(userData);
+  //   console.log(profileUpdateInfo);
+  //   spanElement.textContent = profileUpdateInfo;
+  //   console.log(profileUpdateInfo);
+  //   setTimeout(() => (spanElement.textContent = ''), 2000);
+  // };
 
+
+
+  
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
@@ -105,16 +142,15 @@ function Profile({ onUpdateUser, onSignOut }) {
           </label>
           <input
             required
-            value={userData.name}
+            value={isEditing ? userData.name : currentUser.name}
             onChange={handleChange}
             onBlur={blurHandler}
             name='name'
             className={`profile__input ${isEditing ? 'profile__input_yellow' : ''}`}
             type='text'
             id='name'
-            placeholder={isEditing ? 'Введите новое имя' : currentUser.name}
             disabled={!isEditing}
-          ></input>
+          />
         </fieldset>
 
         <fieldset className='profile__container'>
@@ -123,36 +159,29 @@ function Profile({ onUpdateUser, onSignOut }) {
           </label>
           <input
             required
-            value={userData.email}
+            value={isEditing ? userData.email : currentUser.email}
             onChange={handleChange}
             onBlur={blurHandler}
             name='email'
             className={`profile__input ${isEditing ? 'profile__input_yellow' : ''}`}
             type='email'
             id='email'
-            placeholder={isEditing ? 'Введите новый E-mail' : currentUser.email}
             disabled={!isEditing}
-          ></input>
+          />
         </fieldset>
         {nameDirty && nameError && <span className='profile__error'>{nameError}</span>}
         {emailDirty && emailError && <span className='profile__error'>{emailError}</span>}
-
+        {isEditing && sameValues && <span className='profile__error'>{sameValues}</span>}
         <button
-          disabled={isValueSameAsWas}
+        id='submitButton'
+          disabled={!formValid}
           onClick={editFormClick}
           className={`profile__submitButton hover-button ${!isEditing ? 'hidden' : ''}`}
         >
           Сохранить
         </button>
       </form>
-      <span id='profile__userChangeConfirmation' className='profile__userChangeConfirmation'></span>
-
-      <button
-        onClick={editFormClick}
-        className={`profile__cancelEditionButton hover-button ${!isEditing ? 'hidden' : ''}`}
-      >
-        Отменить редактирование
-      </button>
+      {!isEditing && <span id='profile__userChangeConfirmation' className='profile__userChangeConfirmation'>{profileUpdateInfo}</span>}
       <div className={`profile__buttons-container ${isEditing ? 'hidden' : ''}`}>
         <button onClick={editFormClick} className='profile__editButton hover-button'>
           Редактировать

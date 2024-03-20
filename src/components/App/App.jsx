@@ -21,6 +21,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [profileUpdateInfo, setProfileUpdateInfo] = useState('');
+
   const [savedMovies, setSavedMovies] = useState([]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -70,10 +72,12 @@ function App() {
     mainApi
       .updateUserInfo(newUserInfo)
       .then((data) => {
+        setProfileUpdateInfo("Данные успешно изменены")
         setCurrentUser(data);
       })
       .catch((err) => {
-        console.log('errorApp.js');
+        console.log(err);
+        setProfileUpdateInfo("Email занят другим пользователем")
       })
       .finally(() => {
         setIsLoading(false);
@@ -190,6 +194,8 @@ function App() {
                 isLoading={isLoading}
                 onUpdateUser={handleUpdateUser}
                 onSignOut={onSignOut}
+                profileUpdateInfo={profileUpdateInfo}
+                setProfileUpdateInfo={setProfileUpdateInfo}
               />
             }
           />
